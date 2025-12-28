@@ -90,7 +90,7 @@ describe('handleMdselSelect', () => {
       expect(result.content[0].type).toBe('text');
       expect(result.content[0].text).toContain('matches');
       expect(mockSpawn).toHaveBeenCalledWith(
-        '/home/dustin/.local/bin/mdsel',
+        'mdsel',
         ['select', 'heading:h1[0]', 'README.md'],
         expect.any(Object)
       );
@@ -122,7 +122,7 @@ describe('handleMdselSelect', () => {
       // Assert
       expect(result.isError).toBe(false);
       expect(mockSpawn).toHaveBeenCalledWith(
-        '/home/dustin/.local/bin/mdsel',
+        'mdsel',
         ['select', 'readme::heading:h2[0]', 'README.md'],
         expect.any(Object)
       );
@@ -150,7 +150,7 @@ describe('handleMdselSelect', () => {
       // Assert
       expect(result.isError).toBe(false);
       expect(mockSpawn).toHaveBeenCalledWith(
-        '/home/dustin/.local/bin/mdsel',
+        'mdsel',
         ['select', 'section[0]', 'README.md', 'CONTRIBUTING.md'],
         expect.any(Object)
       );
@@ -187,7 +187,7 @@ describe('handleMdselSelect', () => {
       // Assert
       expect(result.isError).toBe(false);
       expect(mockSpawn).toHaveBeenCalledWith(
-        '/home/dustin/.local/bin/mdsel',
+        'mdsel',
         ['select', 'section[1]?full=true', 'README.md'],
         expect.any(Object)
       );
@@ -405,7 +405,7 @@ describe('handleMdselSelect', () => {
       // Assert
       expect(result.isError).toBe(false);
       expect(mockSpawn).toHaveBeenCalledWith(
-        '/home/dustin/.local/bin/mdsel',
+        'mdsel',
         ['select', 'readme::heading:h1[0]/block:code[0]', 'README.md'],
         expect.any(Object)
       );

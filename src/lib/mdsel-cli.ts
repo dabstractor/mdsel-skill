@@ -2,8 +2,9 @@ import { spawn } from 'node:child_process';
 
 import type { MdselResult, MdselExecOptions } from '../types.js';
 
-// CRITICAL: Use absolute path to mdsel CLI
-const MDSEL_PATH = '/home/dustin/.local/bin/mdsel';
+// CRITICAL: Path to mdsel CLI - can be overridden via MDSEL_PATH environment variable
+// Defaults to 'mdsel' which will be resolved from PATH
+const MDSEL_PATH = process.env.MDSEL_PATH || 'mdsel';
 
 // CRITICAL: Default timeout to prevent hanging processes
 const DEFAULT_TIMEOUT = 30000; // 30 seconds
@@ -55,7 +56,7 @@ export async function execMdsel(
     } catch (error) {
       const err = error as NodeJS.ErrnoException;
       if (err.code === 'ENOENT') {
-        stderr = `mdsel CLI not found at ${MDSEL_PATH}. Install with: npm install -g mdsel`;
+        stderr = `mdsel CLI not found at "${MDSEL_PATH}". Install with: npm install -g mdsel, or set MDSEL_PATH environment variable.`;
       } else {
         stderr = err.message;
       }
@@ -110,7 +111,7 @@ export async function execMdsel(
       clearTimeout(timeoutId);
 
       if (error.code === 'ENOENT') {
-        stderr = `mdsel CLI not found at ${MDSEL_PATH}. Install with: npm install -g mdsel`;
+        stderr = `mdsel CLI not found at "${MDSEL_PATH}". Install with: npm install -g mdsel, or set MDSEL_PATH environment variable.`;
       } else {
         stderr += error.message;
       }

@@ -18,7 +18,7 @@ import { countWords, getWordThreshold } from '../lib/word-count.js';
  *
  * Received from Claude Code via stdin when Read tool is invoked.
  */
-interface HookInput {
+export interface HookInput {
   session_id: string;
   hook_event_name: string; // Always "PreToolUse"
   tool_name: string; // Always "Read" for this hook
@@ -32,7 +32,7 @@ interface HookInput {
  *
  * Returned to Claude Code via stdout.
  */
-interface HookOutput {
+export interface HookOutput {
   continue: boolean; // Always true for this hook (never block)
   systemMessage?: string; // Reminder message if threshold exceeded
 }
@@ -41,6 +41,41 @@ interface HookOutput {
 // No variation allowed - must match exactly every time
 const REMINDER_MESSAGE = `This is a Markdown file over the configured size threshold.
 Use mdsel_index and mdsel_select instead of Read.`;
+
+/**
+ * Process hook function - can be tested directly
+ *
+ * @param input - HookInput from Claude Code
+ * @returns HookOutput to send back
+ */
+export async function processHook(input: HookInput): Promise<HookOutput> {
+  // PATTERN: Initialize output with continue: true (never block)
+  const output: HookOutput = { continue: true };
+
+  // CRITICAL: Only process .md files - let other files pass through
+  const filePath = input.tool_input.file_path;
+  if (extname(filePath).toLowerCase() !== '.md') {
+    return output;
+  }
+
+  // PATTERN: Try/catch for file operations - let Read tool handle errors
+  try {
+    const content = readFileSync(filePath, 'utf-8');
+    const wordCount = countWords(content);
+    const threshold = getWordThreshold();
+
+    // CRITICAL: Only inject reminder if above threshold
+    if (wordCount > threshold) {
+      output.systemMessage = REMINDER_MESSAGE;
+    }
+  } catch {
+    // File doesn't exist or can't be read
+    // Let Read tool handle the error - don't crash the hook
+    // PATTERN: Silent failure - output remains { continue: true }
+  }
+
+  return output;
+}
 
 /**
  * Main hook execution function
@@ -64,39 +99,25 @@ async function main(): Promise<void> {
   // GOTCHA: JSON.parse can throw - but Claude Code guarantees valid JSON
   const input: HookInput = JSON.parse(inputData);
 
-  // PATTERN: Initialize output with continue: true (never block)
-  const output: HookOutput = { continue: true };
-
-  // CRITICAL: Only process .md files - let other files pass through
-  const filePath = input.tool_input.file_path;
-  if (extname(filePath).toLowerCase() !== '.md') {
-    console.log(JSON.stringify(output));
-    process.exit(0);
-  }
-
-  // PATTERN: Try/catch for file operations - let Read tool handle errors
-  try {
-    const content = readFileSync(filePath, 'utf-8');
-    const wordCount = countWords(content);
-    const threshold = getWordThreshold();
-
-    // CRITICAL: Only inject reminder if above threshold
-    if (wordCount > threshold) {
-      output.systemMessage = REMINDER_MESSAGE;
-    }
-  } catch {
-    // File doesn't exist or can't be read
-    // Let Read tool handle the error - don't crash the hook
-    // PATTERN: Silent failure - output remains { continue: true }
-  }
+  // Process the hook
+  const output = await processHook(input);
 
   // PATTERN: Output JSON to stdout, exit with 0
   console.log(JSON.stringify(output));
   process.exit(0);
 }
 
-// PATTERN: Invoke main and handle promise rejection
-main().catch((_error) => {
-  console.error(JSON.stringify({ continue: true }));
-  process.exit(0);
-});
+// PATTERN: Only invoke main() when this file is run directly (not imported)
+// Check if this is the main module by checking import.meta.url
+const isMainModule =
+  import.meta.url === `file://${process.argv[1]}` ||
+  process.argv[1].endsWith('/read-hook.js') ||
+  process.argv[1].endsWith('/read-hook.ts');
+
+if (isMainModule) {
+  // PATTERN: Invoke main and handle promise rejection
+  main().catch((_error) => {
+    console.error(JSON.stringify({ continue: true }));
+    process.exit(0);
+  });
+}

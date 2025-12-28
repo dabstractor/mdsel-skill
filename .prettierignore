@@ -26,3 +26,7 @@ playwright-report/
 # OS
 .DS_Store
 Thumbs.db
+
+# External task definitions
+tasks.json
+PRD.md

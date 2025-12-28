@@ -80,11 +80,7 @@ describe('handleMdselIndex', () => {
       expect(result.content[0].type).toBe('text');
       expect(result.content[0].text).toContain('indexed');
       expect(result.content[0].text).toContain('selectors');
-      expect(mockSpawn).toHaveBeenCalledWith(
-        '/home/dustin/.local/bin/mdsel',
-        ['index', 'README.md'],
-        expect.any(Object)
-      );
+      expect(mockSpawn).toHaveBeenCalledWith('mdsel', ['index', 'README.md'], expect.any(Object));
     });
 
     it('should index multiple files and return JSON', async () => {
@@ -113,7 +109,7 @@ describe('handleMdselIndex', () => {
       expect(result.content[0].text).toContain('README.md');
       expect(result.content[0].text).toContain('CONTRIBUTING.md');
       expect(mockSpawn).toHaveBeenCalledWith(
-        '/home/dustin/.local/bin/mdsel',
+        'mdsel',
         ['index', 'README.md', 'CONTRIBUTING.md'],
         expect.any(Object)
       );
@@ -133,7 +129,7 @@ describe('handleMdselIndex', () => {
       // Assert
       expect(result.isError).toBe(false);
       expect(mockSpawn).toHaveBeenCalledWith(
-        '/home/dustin/.local/bin/mdsel',
+        'mdsel',
         ['index', '/home/user/docs/file.md'],
         expect.any(Object)
       );
@@ -170,11 +166,7 @@ describe('handleMdselIndex', () => {
 
       // Assert
       expect(result.isError).toBe(true);
-      expect(mockSpawn).toHaveBeenCalledWith(
-        '/home/dustin/.local/bin/mdsel',
-        ['index', 'invalid.md'],
-        expect.any(Object)
-      );
+      expect(mockSpawn).toHaveBeenCalledWith('mdsel', ['index', 'invalid.md'], expect.any(Object));
     });
 
     it('should handle ENOENT error (mdsel not found)', async () => {
@@ -287,11 +279,7 @@ describe('handleMdselIndex', () => {
 
       // Assert
       expect(result.isError).toBe(false);
-      expect(mockSpawn).toHaveBeenCalledWith(
-        '/home/dustin/.local/bin/mdsel',
-        ['index'],
-        expect.any(Object)
-      );
+      expect(mockSpawn).toHaveBeenCalledWith('mdsel', ['index'], expect.any(Object));
     });
 
     it('should handle file with no selectors', async () => {

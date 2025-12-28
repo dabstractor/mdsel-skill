@@ -59,7 +59,7 @@ describe('execMdsel', () => {
       expect(result.stderr).toBe('');
       expect(result.exitCode).toBe(0);
       expect(mockSpawn).toHaveBeenCalledWith(
-        '/home/dustin/.local/bin/mdsel',
+        'mdsel',
         ['index', 'README.md', '--json'],
         expect.objectContaining({ stdio: expect.arrayContaining(['pipe', 'pipe', 'pipe']) })
       );
@@ -98,7 +98,7 @@ describe('execMdsel', () => {
 
       expect(result.success).toBe(true);
       expect(mockSpawn).toHaveBeenCalledWith(
-        '/home/dustin/.local/bin/mdsel',
+        'mdsel',
         ['select', 'heading:h1[0]', 'README.md', '--json'],
         expect.any(Object)
       );
@@ -467,7 +467,7 @@ describe('execMdsel', () => {
       await execMdsel(['index', 'README.md', '--json'], { cwd: '/custom/path' });
 
       expect(mockSpawn).toHaveBeenCalledWith(
-        '/home/dustin/.local/bin/mdsel',
+        'mdsel',
         ['index', 'README.md', '--json'],
         expect.objectContaining({ cwd: '/custom/path' })
       );
@@ -506,7 +506,7 @@ describe('execMdsel', () => {
       await execMdsel(['index', 'README.md', '--json'], { env: customEnv });
 
       expect(mockSpawn).toHaveBeenCalledWith(
-        '/home/dustin/.local/bin/mdsel',
+        'mdsel',
         ['index', 'README.md', '--json'],
         expect.objectContaining({ env: customEnv })
       );
