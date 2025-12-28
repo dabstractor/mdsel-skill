@@ -82,21 +82,21 @@
           "type": "Milestone",
           "id": "P1.M2",
           "title": "mdsel CLI Wrapper",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Implement thin wrapper around mdsel CLI that executes commands and returns JSON output verbatim.",
           "tasks": [
             {
               "type": "Task",
               "id": "P1.M2.T1",
               "title": "Implement mdsel CLI Executor",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create utility to spawn mdsel subprocess and capture JSON output.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M2.T1.S1",
                   "title": "Define MdselResult type interface",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P1.M1.T1.S5"
@@ -107,7 +107,7 @@
                   "type": "Subtask",
                   "id": "P1.M2.T1.S2",
                   "title": "Implement execMdsel function",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M2.T1.S1"
@@ -118,7 +118,7 @@
                   "type": "Subtask",
                   "id": "P1.M2.T1.S3",
                   "title": "Write tests for execMdsel",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M2.T1.S2"
