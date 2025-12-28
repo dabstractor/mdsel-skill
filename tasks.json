@@ -411,21 +411,21 @@
           "type": "Milestone",
           "id": "P2.M3",
           "title": "Hook Configuration Documentation",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Create configuration examples and documentation for installing the hook in Claude Code settings.",
           "tasks": [
             {
               "type": "Task",
               "id": "P2.M3.T1",
               "title": "Create Hook Configuration Guide",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Document how to configure the PreToolUse hook in Claude Code settings.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P2.M3.T1.S1",
                   "title": "Create example .claude/settings.json",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P2.M2.T1.S3"
@@ -436,7 +436,7 @@
                   "type": "Subtask",
                   "id": "P2.M3.T1.S2",
                   "title": "Create installation instructions in README",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P2.M3.T1.S1"
