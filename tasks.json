@@ -349,21 +349,21 @@
           "type": "Milestone",
           "id": "P2.M2",
           "title": "PreToolUse Hook Implementation",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Implement the Read tool interceptor hook that checks Markdown files and injects reminders.",
           "tasks": [
             {
               "type": "Task",
               "id": "P2.M2.T1",
               "title": "Implement Read Hook Script",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create standalone hook script that intercepts Read tool calls and injects reminders for large Markdown files.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P2.M2.T1.S1",
                   "title": "Define hook input/output types",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P2.M1.T1.S2"
@@ -374,7 +374,7 @@
                   "type": "Subtask",
                   "id": "P2.M2.T1.S2",
                   "title": "Implement read-hook.ts script",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 2,
                   "dependencies": [
                     "P2.M2.T1.S1"
@@ -385,7 +385,7 @@
                   "type": "Subtask",
                   "id": "P2.M2.T1.S3",
                   "title": "Add read-hook to tsup build config",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P2.M2.T1.S2"
@@ -396,7 +396,7 @@
                   "type": "Subtask",
                   "id": "P2.M2.T1.S4",
                   "title": "Write tests for read-hook script",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 2,
                   "dependencies": [
                     "P2.M2.T1.S2"
