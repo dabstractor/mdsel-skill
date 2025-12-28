@@ -133,7 +133,7 @@
           "type": "Milestone",
           "id": "P1.M3",
           "title": "MCP Tool Handlers",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Implement mdsel_index and mdsel_select tool handlers that delegate to mdsel CLI.",
           "tasks": [
             {
@@ -182,14 +182,14 @@
               "type": "Task",
               "id": "P1.M3.T2",
               "title": "Implement mdsel_select Tool",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create tool handler for mdsel_select that calls mdsel select and returns JSON verbatim.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M3.T2.S1",
                   "title": "Define mdsel_select input schema",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P1.M2.T1.S2"
@@ -200,7 +200,7 @@
                   "type": "Subtask",
                   "id": "P1.M3.T2.S2",
                   "title": "Implement handleMdselSelect function",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M3.T2.S1"
@@ -211,7 +211,7 @@
                   "type": "Subtask",
                   "id": "P1.M3.T2.S3",
                   "title": "Write tests for mdsel_select handler",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M3.T2.S2"
