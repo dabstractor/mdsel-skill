@@ -1,0 +1,78 @@
+{
+  "success": true,
+  "command": "index",
+  "timestamp": "2025-12-27T00:00:00.000Z",
+  "data": {
+    "documents": [
+      {
+        "namespace": "sample",
+        "file_path": "small.md",
+        "root": null,
+        "headings": [
+          {
+            "selector": "sample::heading:h1[0]",
+            "type": "heading:h1",
+            "depth": 1,
+            "text": "Small Document",
+            "content_preview": "Small Document",
+            "truncated": false,
+            "children_count": 4,
+            "word_count": 3
+          },
+          {
+            "selector": "sample::heading:h2[0]",
+            "type": "heading:h2",
+            "depth": 2,
+            "text": "Section One",
+            "content_preview": "Section One",
+            "truncated": false,
+            "children_count": 0,
+            "word_count": 2
+          },
+          {
+            "selector": "sample::heading:h2[1]",
+            "type": "heading:h2",
+            "depth": 2,
+            "text": "Section Two",
+            "content_preview": "Section Two",
+            "truncated": false,
+            "children_count": 0,
+            "word_count": 2
+          },
+          {
+            "selector": "sample::heading:h2[2]",
+            "type": "heading:h2",
+            "depth": 2,
+            "text": "Section Three",
+            "content_preview": "Section Three",
+            "truncated": false,
+            "children_count": 0,
+            "word_count": 2
+          },
+          {
+            "selector": "sample::heading:h2[3]",
+            "type": "heading:h2",
+            "depth": 2,
+            "text": "Section Four",
+            "content_preview": "Section Four",
+            "truncated": false,
+            "children_count": 0,
+            "word_count": 2
+          }
+        ],
+        "blocks": {
+          "paragraphs": 5,
+          "code_blocks": 0,
+          "lists": 0,
+          "tables": 0,
+          "blockquotes": 0
+        }
+      }
+    ]
+  },
+  "summary": {
+    "total_documents": 1,
+    "total_nodes": 5,
+    "total_selectors": 5
+  }
+}

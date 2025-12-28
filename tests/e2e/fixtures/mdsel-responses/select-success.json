@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "command": "select",
+  "timestamp": "2025-12-27T00:00:00.000Z",
+  "data": {
+    "matches": [
+      {
+        "selector": "sample::heading:h1[0]",
+        "type": "heading:h1",
+        "depth": 1,
+        "text": "Small Document",
+        "content": "# Small Document",
+        "truncated": false,
+        "children": [
+          {
+            "selector": "sample::heading:h2[0]",
+            "type": "heading:h2",
+            "text": "Section One"
+          },
+          {
+            "selector": "sample::heading:h2[1]",
+            "type": "heading:h2",
+            "text": "Section Two"
+          }
+        ]
+      }
+    ],
+    "unresolved": []
+  }
+}

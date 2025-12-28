@@ -467,14 +467,14 @@
               "type": "Task",
               "id": "P3.M1.T1",
               "title": "Create E2E Test Suite",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Comprehensive tests validating PRD success criteria.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P3.M1.T1.S1",
                   "title": "Test mdsel output passthrough fidelity",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M4.T1.S4",
@@ -486,7 +486,7 @@
                   "type": "Subtask",
                   "id": "P3.M1.T1.S2",
                   "title": "Test reminder hook consistency",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P2.M2.T1.S4"
@@ -497,7 +497,7 @@
                   "type": "Subtask",
                   "id": "P3.M1.T1.S3",
                   "title": "Verify exactly 2 tools exposed",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P1.M4.T1.S4"

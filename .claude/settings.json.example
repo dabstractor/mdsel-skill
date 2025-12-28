@@ -1,0 +1,37 @@
+// NOTE: This is an example file with comments.
+// Remove all comments before using this configuration.
+
+{
+  // MCP Server Configuration
+  // Exposes mdsel_index and mdsel_select tools to Claude Code
+  "mcpServers": {
+    "mdsel": {
+      "command": "node",
+      // Replace with absolute path to mdsel-claude/dist/index.js
+      "args": ["/path/to/mdsel-claude/dist/index.js"],
+      "env": {
+        // Word count threshold for hook reminders (default: 200)
+        "MDSEL_MIN_WORDS": "200"
+      }
+    }
+  },
+
+  // PreToolUse Hook Configuration
+  // Intercepts Read tool for large Markdown files
+  "hooks": {
+    "PreToolUse": [
+      {
+        // Match only the Read tool
+        "matcher": "Read",
+        "hooks": [
+          {
+            // Command-type hook executes external script
+            "type": "command",
+            // Replace with absolute path to mdsel-claude/dist/hooks/read-hook.js
+            "command": "node /path/to/mdsel-claude/dist/hooks/read-hook.js"
+          }
+        ]
+      }
+    ]
+  }
+}
