@@ -140,14 +140,14 @@
               "type": "Task",
               "id": "P1.M3.T1",
               "title": "Implement mdsel_index Tool",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create tool handler for mdsel_index that calls mdsel index and returns JSON verbatim.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M3.T1.S1",
                   "title": "Define mdsel_index input schema",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P1.M2.T1.S2"
@@ -158,7 +158,7 @@
                   "type": "Subtask",
                   "id": "P1.M3.T1.S2",
                   "title": "Implement handleMdselIndex function",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M3.T1.S1"
@@ -169,7 +169,7 @@
                   "type": "Subtask",
                   "id": "P1.M3.T1.S3",
                   "title": "Write tests for mdsel_index handler",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M3.T1.S2"
