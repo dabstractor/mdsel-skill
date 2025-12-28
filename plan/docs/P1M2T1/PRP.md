@@ -46,6 +46,7 @@ Create the mdsel CLI executor utility across three subtasks:
 ### P1.M2.T1.S1: Define MdselResult Type Interface (0.5 points)
 
 Modify `src/types.ts` to define:
+
 - `MdselResult` - Result interface with success, stdout, stderr, exitCode
 - `MdselExecOptions` - Optional execution settings (cwd, env, timeout, maxBuffer, killSignal)
 - `MdselExecutionError` - Error class for failed commands (with exitCode, stderr, stdout)
@@ -55,6 +56,7 @@ Modify `src/types.ts` to define:
 ### P1.M2.T1.S2: Implement execMdsel Function (1 point)
 
 Create `src/lib/mdsel-cli.ts` with:
+
 - Uses Node.js `spawn()` from `node:child_process` (NOT exec/execSync)
 - Spawns mdsel CLI from absolute path `/home/dustin/.local/bin/mdsel`
 - Captures stdout and stderr as strings
@@ -67,6 +69,7 @@ Create `src/lib/mdsel-cli.ts` with:
 ### P1.M2.T1.S3: Write Tests for execMdsel (1 point)
 
 Create `tests/lib/mdsel-cli.test.ts` with:
+
 - Mock `node:child_process` module with `vi.mock()` at top level
 - Test successful index command (exit code 0)
 - Test successful select command (exit code 0)
@@ -409,7 +412,7 @@ Task 3: CREATE tests/lib/mdsel-cli.test.ts
 
 ### Implementation Patterns & Key Details
 
-```typescript
+````typescript
 // ==================== src/lib/mdsel-cli.ts ====================
 // Complete implementation following these patterns
 
@@ -448,7 +451,7 @@ export async function execMdsel(
     env = process.env,
     timeout = DEFAULT_TIMEOUT,
     // Note: maxBuffer not used with spawn() (streaming, not buffered)
-    killSignal = 'SIGTERM'
+    killSignal = 'SIGTERM',
   } = options;
 
   return new Promise<MdselResult>((resolve) => {
@@ -521,7 +524,7 @@ export async function execMdsel(
     });
   });
 }
-```
+````
 
 ### Test Implementation Pattern
 

@@ -33,7 +33,7 @@ export async function execMdsel(
     env = process.env,
     timeout = DEFAULT_TIMEOUT,
     // Note: maxBuffer not used with spawn() (streaming, not buffered)
-    killSignal = 'SIGTERM'
+    killSignal = 'SIGTERM',
   } = options;
 
   return new Promise<MdselResult>((resolve) => {

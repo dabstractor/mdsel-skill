@@ -166,7 +166,7 @@ describe('JSON output handling', () => {
     const jsonOutput = JSON.stringify({
       success: true,
       command: 'index',
-      data: { documents: [] }
+      data: { documents: [] },
     });
 
     mockExec.mockImplementation((cmd, opts, cb) => {
@@ -210,21 +210,23 @@ export const mdselResponses = {
       command: 'index',
       timestamp: '2025-12-28T00:10:24.645Z',
       data: {
-        documents: [{
-          namespace: 'readme',
-          file_path: 'README.md',
-          headings: [],
-          blocks: { paragraphs: 1, code_blocks: 0, lists: 0, tables: 0 }
-        }],
-        summary: { total_documents: 1, total_nodes: 1, total_selectors: 1 }
-      }
+        documents: [
+          {
+            namespace: 'readme',
+            file_path: 'README.md',
+            headings: [],
+            blocks: { paragraphs: 1, code_blocks: 0, lists: 0, tables: 0 },
+          },
+        ],
+        summary: { total_documents: 1, total_nodes: 1, total_selectors: 1 },
+      },
     }),
-    stderr: ''
+    stderr: '',
   },
 
   indexError: {
     stdout: '',
-    stderr: 'Error: File not found: missing.md'
+    stderr: 'Error: File not found: missing.md',
   },
 
   selectSuccess: {
@@ -234,10 +236,10 @@ export const mdselResponses = {
       timestamp: '2025-12-28T00:10:30.065Z',
       data: {
         matches: [{ selector: 'heading:h1[0]', content: '# Title' }],
-        unresolved: []
-      }
+        unresolved: [],
+      },
     }),
-    stderr: ''
+    stderr: '',
   },
 
   selectorNotFound: {
@@ -246,20 +248,22 @@ export const mdselResponses = {
       command: 'select',
       data: {
         matches: [],
-        unresolved: [{
-          selector: 'invalid',
-          reason: 'Selector not found'
-        }]
-      }
+        unresolved: [
+          {
+            selector: 'invalid',
+            reason: 'Selector not found',
+          },
+        ],
+      },
     }),
-    stderr: ''
-  }
+    stderr: '',
+  },
 };
 
 export const mdselCommands = {
   index: ['index', 'README.md', '--json'],
   select: ['select', 'heading:h1[0]', 'README.md', '--json'],
-  invalid: ['select', 'invalid::selector', 'README.md', '--json']
+  invalid: ['select', 'invalid::selector', 'README.md', '--json'],
 };
 ```
 
@@ -342,7 +346,7 @@ it('should handle async', async () => {
 ```typescript
 // ❌ BAD: Mocks all exec calls globally
 vi.mock('node:child_process', () => ({
-  exec: vi.fn(() => 'mocked result')
+  exec: vi.fn(() => 'mocked result'),
 }));
 
 // ✅ GOOD: Context-specific mocking

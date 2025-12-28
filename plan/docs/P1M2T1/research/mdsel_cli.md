@@ -22,11 +22,13 @@ mdsel index <files...>
 **Purpose**: Parse documents and emit selector inventory
 
 **Arguments**:
+
 - `files...`: One or more Markdown file paths to index
 
 **Output**: JSON with all available selectors, headings, blocks, and word counts
 
 **Example**:
+
 ```bash
 mdsel index README.md docs/API.md
 ```
@@ -40,13 +42,16 @@ mdsel select [options] <selector> [files...]
 **Purpose**: Retrieve content via selectors
 
 **Arguments**:
+
 - `selector`: Declarative selector string
 - `files...`: One or more Markdown file paths to search
 
 **Options**:
+
 - `--full`: Bypass truncation and return full content
 
 **Example**:
+
 ```bash
 mdsel select "readme::heading:h2[0]" README.md
 mdsel select "section[0]?full=true" README.md --full
@@ -61,6 +66,7 @@ mdsel format [command]
 **Purpose**: Output format specification for tool descriptions
 
 **Options**:
+
 - `--example`: Show example output instead of terse spec
 
 ## JSON Output Format
@@ -73,7 +79,7 @@ All mdsel responses follow this structure:
 interface CLIResponse<T = unknown> {
   success: boolean;
   command: 'index' | 'select';
-  timestamp: string;        // ISO 8601 format
+  timestamp: string; // ISO 8601 format
   data: T | null;
   errors?: ErrorEntry[];
 }
@@ -164,11 +170,7 @@ interface CLIResponse<T = unknown> {
       {
         "selector": "readme::heading:h2.99",
         "reason": "Index 99 out of range (only 8 heading:h2(s) found)",
-        "suggestions": [
-          "readme::heading:h2[0]",
-          "readme::heading:h2[1]",
-          "readme::heading:h2[2]"
-        ]
+        "suggestions": ["readme::heading:h2[0]", "readme::heading:h2[1]", "readme::heading:h2[2]"]
       }
     ]
   }
@@ -191,20 +193,20 @@ interface CLIResponse<T = unknown> {
 
 ### Node Types
 
-| Type | Description | Example |
-|------|-------------|---------|
-| `root` | Document root | `root` |
-| `heading:h1` | Level 1 heading | `heading:h1[0]` |
-| `heading:h2` | Level 2 heading | `heading:h2[1]` |
-| `heading:h3` | Level 3 heading | `heading:h3[0]` |
-| `heading:h4` | Level 4 heading | `heading:h4[0]` |
-| `heading:h5` | Level 5 heading | `heading:h5[0]` |
-| `heading:h6` | Level 6 heading | `heading:h6[0]` |
-| `section` | Document section | `section[0]` |
-| `block:paragraph` | Paragraph block | `block:paragraph[0]` |
-| `block:list` | List block | `block:list[0]` |
-| `block:code` | Code block | `block:code[0]` |
-| `block:table` | Table block | `block:table[0]` |
+| Type               | Description      | Example               |
+| ------------------ | ---------------- | --------------------- |
+| `root`             | Document root    | `root`                |
+| `heading:h1`       | Level 1 heading  | `heading:h1[0]`       |
+| `heading:h2`       | Level 2 heading  | `heading:h2[1]`       |
+| `heading:h3`       | Level 3 heading  | `heading:h3[0]`       |
+| `heading:h4`       | Level 4 heading  | `heading:h4[0]`       |
+| `heading:h5`       | Level 5 heading  | `heading:h5[0]`       |
+| `heading:h6`       | Level 6 heading  | `heading:h6[0]`       |
+| `section`          | Document section | `section[0]`          |
+| `block:paragraph`  | Paragraph block  | `block:paragraph[0]`  |
+| `block:list`       | List block       | `block:list[0]`       |
+| `block:code`       | Code block       | `block:code[0]`       |
+| `block:table`      | Table block      | `block:table[0]`      |
 | `block:blockquote` | Blockquote block | `block:blockquote[0]` |
 
 ### Selector Examples
@@ -228,22 +230,22 @@ readme::heading:h1[0]/block:code[0]
 
 ## Error Types
 
-| Type | Description |
-|------|-------------|
-| `FILE_NOT_FOUND` | Specified file does not exist |
-| `PARSE_ERROR` | Markdown parsing failed |
-| `INVALID_SELECTOR` | Selector syntax is invalid |
-| `SELECTOR_NOT_FOUND` | Selector does not match any nodes |
+| Type                  | Description                        |
+| --------------------- | ---------------------------------- |
+| `FILE_NOT_FOUND`      | Specified file does not exist      |
+| `PARSE_ERROR`         | Markdown parsing failed            |
+| `INVALID_SELECTOR`    | Selector syntax is invalid         |
+| `SELECTOR_NOT_FOUND`  | Selector does not match any nodes  |
 | `NAMESPACE_NOT_FOUND` | Specified namespace does not exist |
-| `PROCESSING_ERROR` | General processing error |
+| `PROCESSING_ERROR`    | General processing error           |
 
 ## Exit Codes
 
-| Code | Meaning |
-|------|---------|
-| 0 | Success |
-| 1 | Error |
-| 2 | Usage error |
+| Code | Meaning     |
+| ---- | ----------- |
+| 0    | Success     |
+| 1    | Error       |
+| 2    | Usage error |
 
 ## Critical Implementation Notes
 
@@ -263,6 +265,7 @@ mdsel index README.md
 ### Verbatim Passthrough Requirement
 
 Per PRD section 8, mdsel output must be returned **verbatim**:
+
 - No JSON parsing or transformation
 - No error message rewriting
 - No adding explanations or suggestions
@@ -270,6 +273,7 @@ Per PRD section 8, mdsel output must be returned **verbatim**:
 ### CLI Location
 
 The mdsel CLI is installed at:
+
 ```
 /home/dustin/.local/bin/mdsel
 ```

@@ -3,12 +3,14 @@
 ## 1. Official Node.js Documentation
 
 ### Primary Documentation
+
 - [Node.js child_process Module](https://nodejs.org/api/child_process.html)
 - [child_process.exec()](https://nodejs.org/api/child_process.html#child_processexeccommand-options-callback)
 - [child_process.execFile()](https://nodejs.org/api/child_process.html#child_processexecfilefile-args-options-callback)
 - [child_process.spawn()](https://nodejs.org/api/child_process.html#child_processspawncommand-args-options)
 
 ### Key Documentation Sections
+
 - [Process Management](https://nodejs.org/api/child_process.html#process-management)
 - [Event Emitter](https://nodejs.org/api/child_process.html#class-childprocess)
 - [Class Method: ChildProcess](https://nodejs.org/api/child_process.html#class-childprocess)
@@ -16,6 +18,7 @@
 ## 2. Comparison: exec vs execFile vs spawn
 
 ### exec()
+
 ```typescript
 // Best for: Shell commands with small output
 const { exec } = require('child_process');
@@ -27,12 +30,14 @@ exec('ls -la', (error, stdout, stderr) => {
 ```
 
 **Characteristics:**
+
 - Spawns a shell (`/bin/sh` by default)
 - Buffers output (max 200KB by default)
 - Simple callback interface
 - Vulnerable to shell injection if used with user input
 
 ### execFile()
+
 ```typescript
 // Best for: Direct executable execution
 const { execFile } = require('child_process');
@@ -44,6 +49,7 @@ execFile('ls', ['-la'], (error, stdout, stderr) => {
 ```
 
 **Characteristics:**
+
 - Executes file directly without shell
 - More secure than exec
 - Buffers output (max 200KB by default)
@@ -51,6 +57,7 @@ execFile('ls', ['-la'], (error, stdout, stderr) => {
 - **RECOMMENDED FOR CLI TOOL EXECUTOR**
 
 ### spawn()
+
 ```typescript
 // Best for: Large data or streaming
 const { spawn } = require('child_process');
@@ -62,6 +69,7 @@ child.stdout.on('data', (data) => {
 ```
 
 **Characteristics:**
+
 - Returns streams instead of buffering
 - No shell by default (set `shell: true` to enable)
 - More memory efficient for large outputs
@@ -102,13 +110,13 @@ async function executeCLITool(
       encoding: 'utf8',
       timeout: options.timeout ?? 30000,
       env: { ...process.env, ...options.env },
-      ...options
+      ...options,
     });
 
     return {
       stdout,
       stderr,
-      exitCode: 0 // Only available if using callback version
+      exitCode: 0, // Only available if using callback version
     };
   } catch (error: any) {
     // Handle specific error types
@@ -122,7 +130,7 @@ async function executeCLITool(
     return {
       stdout: error.stdout || '',
       stderr: error.stderr || error.message,
-      exitCode: error.code || 1
+      exitCode: error.code || 1,
     };
   }
 }
@@ -155,8 +163,7 @@ async function executeCLIWithJSON<T>(
     return parsed as T;
   } catch (parseError) {
     throw new Error(
-      `Failed to parse JSON output: ${(parseError as Error).message}\n` +
-      `Output: ${result.stdout}`
+      `Failed to parse JSON output: ${(parseError as Error).message}\n` + `Output: ${result.stdout}`
     );
   }
 }
@@ -197,29 +204,33 @@ async function safeExecuteCLI(
         encoding: 'utf8',
         timeout: options.timeout,
         maxBuffer: options.maxBuffer ?? 1024 * 1024, // 1MB default
-        env: { ...process.env, ...options.env }
+        env: { ...process.env, ...options.env },
       },
       (error, stdout, stderr) => {
         if (error) {
-          reject(new CLIExecutionError(
-            `Command failed: ${error.message}`,
-            error.code,
-            stderr,
-            command,
-            args
-          ));
+          reject(
+            new CLIExecutionError(
+              `Command failed: ${error.message}`,
+              error.code,
+              stderr,
+              command,
+              args
+            )
+          );
           return;
         }
 
         // Check exit code (only available in callback version)
         if (child.exitCode !== 0) {
-          reject(new CLIExecutionError(
-            `Command exited with code ${child.exitCode}`,
-            child.exitCode,
-            stderr,
-            command,
-            args
-          ));
+          reject(
+            new CLIExecutionError(
+              `Command exited with code ${child.exitCode}`,
+              child.exitCode,
+              stderr,
+              command,
+              args
+            )
+          );
           return;
         }
 
@@ -258,18 +269,10 @@ interface CLICommand<T = any> {
 
 class CLIExecutor {
   async execute<T>(config: CLICommand<T>): Promise<T> {
-    const result = await executeCLITool(
-      config.command,
-      config.args,
-      config.options
-    );
+    const result = await executeCLITool(config.command, config.args, config.options);
 
     if (result.exitCode !== 0) {
-      throw new CLIExecutionError(
-        `${config.command} failed`,
-        result.exitCode,
-        result.stderr
-      );
+      throw new CLIExecutionError(`${config.command} failed`, result.exitCode, result.stderr);
     }
 
     const parsed = JSON.parse(result.stdout);
@@ -289,7 +292,7 @@ const systemInfo = await executor.execute<SystemInfo>({
   command: 'node',
   args: ['-e', 'console.log(JSON.stringify(process))'],
   expectedOutputType: SystemInfo,
-  options: { timeout: 5000 }
+  options: { timeout: 5000 },
 });
 ```
 
@@ -324,7 +327,7 @@ describe('CLIExecutor', () => {
 
     const result = await executor.execute({
       command: 'test-tool',
-      args: ['--option', 'value']
+      args: ['--option', 'value'],
     });
 
     expect(result).toEqual({ success: true });
@@ -344,7 +347,7 @@ describe('CLIExecutor', () => {
     await expect(
       executor.execute({
         command: 'failing-tool',
-        args: []
+        args: [],
       })
     ).rejects.toThrow('failed with exit code 1');
   });
@@ -370,15 +373,13 @@ describe('CLIExecutor', () => {
   });
 
   it('should execute command and return JSON', async () => {
-    vi.mocked(execFile).mockImplementation(
-      (cmd, args, options, callback) => {
-        callback(null, '{"data": "test"}', '');
-      }
-    );
+    vi.mocked(execFile).mockImplementation((cmd, args, options, callback) => {
+      callback(null, '{"data": "test"}', '');
+    });
 
     const result = await executor.execute({
       command: 'test-tool',
-      args: ['--output', 'json']
+      args: ['--output', 'json'],
     });
 
     expect(result).toEqual({ data: 'test' });
@@ -406,7 +407,7 @@ describe('CLI Integration Tests', () => {
     try {
       const result = await executor.execute({
         command: 'docker',
-        args: ['exec', container.getId(), 'ls', '/']
+        args: ['exec', container.getId(), 'ls', '/'],
       });
 
       expect(Array.isArray(result)).toBe(true);
@@ -420,6 +421,7 @@ describe('CLI Integration Tests', () => {
 ## 7. Common Pitfalls to Avoid
 
 ### 1. Shell Injection
+
 ```typescript
 // ❌ VULNERABLE
 const userInput = 'file.txt; rm -rf /';
@@ -431,6 +433,7 @@ execFile('cat', [userInput], callback);
 ```
 
 ### 2. Buffer Overflow
+
 ```typescript
 // ❌ RISKY
 exec('large-command', callback); // May hit 200KB limit
@@ -441,6 +444,7 @@ child.stdout.on('data', (chunk) => processChunk(chunk));
 ```
 
 ### 3. Resource Leaks
+
 ```typescript
 // ❌ LEAKS RESOURCES
 spawn('long-running-process');
@@ -453,6 +457,7 @@ setTimeout(() => child.kill(), 30000); // Timeout
 ```
 
 ### 4. Race Conditions
+
 ```typescript
 // ❌ RACE CONDITION
 let result;
@@ -466,6 +471,7 @@ const result = stdout;
 ```
 
 ### 5. Error Message Quality
+
 ```typescript
 // ❌ POOR ERROR MESSAGES
 if (error) throw error;
@@ -483,32 +489,38 @@ if (error) {
 ## 8. Recommended Libraries
 
 ### For JSON Validation
+
 - [Zod](https://zod.dev/) - TypeScript-first schema validation
 - [io-ts](https://github.com/gcanti/io-ts) - Functional runtime type checking
 - [ajv](https://ajv.js.org/) - JSON Schema validator
 
 ### For Process Management
+
 - [zx](https://github.com/google/zx) - Better tools for scripts
 - [execa](https://github.com/sindresorhus/execa) - Enhanced subprocess execution
 - [cross-spawn](https://github.com/moxystudio/node-cross-spawn) - Cross-platform spawn
 
 ### For Testing
+
 - [jest-mock-process](https://github.com/thomas-jung/jest-mock-process) - Process mocking
 - [mock-child-process](https://github.com/nkint/mock-child-process) - Child process mocking
 
 ## 9. Performance Considerations
 
 ### Memory Usage
+
 - `exec/execFile`: Buffers output (memory intensive for large outputs)
 - `spawn`: Streams output (memory efficient for large outputs)
 - Consider buffer limits and adjust with `maxBuffer` option
 
 ### Execution Speed
+
 - `execFile` is faster than `exec` (no shell overhead)
 - `spawn` is most efficient for streaming data
 - Warm up processes for frequently executed commands
 
 ### Timeout Handling
+
 ```typescript
 // Always implement timeouts
 async function executeWithTimeout(
@@ -531,6 +543,7 @@ async function executeWithTimeout(
 ## 10. Security Best Practices
 
 ### Input Validation
+
 ```typescript
 function sanitizeCommandInput(input: string): string {
   // Remove shell metacharacters
@@ -545,6 +558,7 @@ function isValidFilePath(path: string): boolean {
 ```
 
 ### Environment Isolation
+
 ```typescript
 async function executeInIsolatedEnv(
   command: string,
@@ -555,7 +569,7 @@ async function executeInIsolatedEnv(
   const sanitizedEnv = {
     PATH: process.env.PATH,
     HOME: process.env.HOME,
-    ...env
+    ...env,
   };
 
   return executeCLITool(command, args, { env: sanitizedEnv });

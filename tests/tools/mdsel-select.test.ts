@@ -195,11 +195,7 @@ describe('handleMdselSelect', () => {
   describe('error handling', () => {
     it('should return isError: true on invalid selector', async () => {
       // Arrange
-      const mockProcess = createMockProcess(
-        '',
-        'Error: Invalid selector syntax',
-        1
-      );
+      const mockProcess = createMockProcess('', 'Error: Invalid selector syntax', 1);
 
       mockSpawn.mockReturnValue(mockProcess as any);
 
@@ -216,11 +212,7 @@ describe('handleMdselSelect', () => {
 
     it('should return isError: true when file not found', async () => {
       // Arrange
-      const mockProcess = createMockProcess(
-        '',
-        'Error: Cannot read file: /path/to/missing.md',
-        2
-      );
+      const mockProcess = createMockProcess('', 'Error: Cannot read file: /path/to/missing.md', 2);
 
       mockSpawn.mockReturnValue(mockProcess as any);
 

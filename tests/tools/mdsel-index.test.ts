@@ -57,12 +57,8 @@ describe('handleMdselIndex', () => {
         JSON.stringify({
           indexed: ['README.md'],
           selectors: {
-            headings: [
-              { selector: 'heading:h1[0]', text: 'Introduction', level: 1 },
-            ],
-            blocks: [
-              { selector: 'block:paragraph[0]', wordCount: 42 },
-            ],
+            headings: [{ selector: 'heading:h1[0]', text: 'Introduction', level: 1 }],
+            blocks: [{ selector: 'block:paragraph[0]', wordCount: 42 }],
           },
         }),
         '',
@@ -123,11 +119,7 @@ describe('handleMdselIndex', () => {
 
     it('should handle absolute file paths correctly', async () => {
       // Arrange
-      const mockProcess = createMockProcess(
-        JSON.stringify({ indexed: [], selectors: {} }),
-        '',
-        0
-      );
+      const mockProcess = createMockProcess(JSON.stringify({ indexed: [], selectors: {} }), '', 0);
 
       mockSpawn.mockReturnValue(mockProcess as any);
 
@@ -165,11 +157,7 @@ describe('handleMdselIndex', () => {
 
     it('should return isError: true on exit code 2', async () => {
       // Arrange
-      const mockProcess = createMockProcess(
-        '',
-        'Error: Invalid selector syntax',
-        2
-      );
+      const mockProcess = createMockProcess('', 'Error: Invalid selector syntax', 2);
 
       mockSpawn.mockReturnValue(mockProcess as any);
 
@@ -286,11 +274,7 @@ describe('handleMdselIndex', () => {
   describe('empty and edge cases', () => {
     it('should handle empty files array', async () => {
       // Arrange
-      const mockProcess = createMockProcess(
-        JSON.stringify({ indexed: [], selectors: {} }),
-        '',
-        0
-      );
+      const mockProcess = createMockProcess(JSON.stringify({ indexed: [], selectors: {} }), '', 0);
 
       mockSpawn.mockReturnValue(mockProcess as any);
 

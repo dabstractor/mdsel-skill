@@ -30,13 +30,13 @@ const { stdout, stderr } = await execAsync('command');
 
 ## Subprocess Methods Comparison
 
-| Method | Best For | Output Handling | Use Case |
-|--------|----------|-----------------|----------|
-| `exec` | Short commands | Buffered (complete) | Simple commands with arguments |
-| `spawn` | Long processes | Streaming | Real-time data, large outputs |
-| `execFile` | Executing files | Buffered | Direct executable execution |
-| `execSync` | Synchronous | Buffered (blocking) | Scripting (avoid in async) |
-| `fork` | Node.js processes | IPC-aware | Separate Node.js processes |
+| Method     | Best For          | Output Handling     | Use Case                       |
+| ---------- | ----------------- | ------------------- | ------------------------------ |
+| `exec`     | Short commands    | Buffered (complete) | Simple commands with arguments |
+| `spawn`    | Long processes    | Streaming           | Real-time data, large outputs  |
+| `execFile` | Executing files   | Buffered            | Direct executable execution    |
+| `execSync` | Synchronous       | Buffered (blocking) | Scripting (avoid in async)     |
+| `fork`     | Node.js processes | IPC-aware           | Separate Node.js processes     |
 
 ## Type Definitions
 
@@ -172,7 +172,7 @@ const { stdout } = await execAsync('cat huge-file.txt');
 
 // ✅ Process output in chunks or increase maxBuffer
 const { stdout } = await execAsync('cat huge-file.txt', {
-  maxBuffer: 1024 * 1024 * 10 // 10MB
+  maxBuffer: 1024 * 1024 * 10, // 10MB
 });
 ```
 
@@ -198,7 +198,7 @@ process.env.MY_VAR = 'value';
 
 // ✅ Use spawn's env option
 spawn('command', [], {
-  env: { ...process.env, MY_VAR: 'value' }
+  env: { ...process.env, MY_VAR: 'value' },
 });
 ```
 

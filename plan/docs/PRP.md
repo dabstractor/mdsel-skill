@@ -8,11 +8,13 @@ description: |
 **Feature Goal**: Create the `mdsel_index` tool handler that calls `mdsel index` and returns JSON verbatim as an MCP tool.
 
 **Deliverable**: Three new files in `src/tools/`:
+
 1. `src/tools/mdsel-index.ts` - Tool handler implementation
 2. `src/tools/types.ts` - Tool-specific type definitions (input schema)
 3. `tests/tools/mdsel-index.test.ts` - Comprehensive unit tests
 
 **Success Definition**:
+
 - The `mdsel_index` tool accepts a `files: string[]` parameter
 - Calls `execMdsel(['index', ...files, '--json'])` using the existing executor
 - Returns the JSON output verbatim in MCP tool response format
@@ -26,12 +28,14 @@ description: |
 **Use Case**: Claude Code needs to index Markdown files to discover their structure before performing selective content retrieval.
 
 **User Journey**:
+
 1. Claude Code receives a request to analyze a large Markdown file (>200 words)
 2. Instead of using the Read tool, it calls `mdsel_index` with the file path
 3. The tool returns a structured JSON index of headings, blocks, and selectors
 4. Claude Code uses this index to intelligently query specific sections via `mdsel_select`
 
 **Pain Points Addressed**:
+
 - Large Markdown files overwhelm context windows when read entirely
 - Read tool loads entire file regardless of what's needed
 - No way to discover document structure before loading content
@@ -70,6 +74,7 @@ Create an MCP tool handler for `mdsel_index` that:
 **Validation**: "If someone knew nothing about this codebase, would they have everything needed to implement this successfully?"
 
 **Answer**: Yes - this PRP provides:
+
 - Complete file structure with exact paths and naming conventions
 - Specific code patterns from existing `mdsel-cli.ts` to follow
 - Exact import syntax required for ESM (`.js` extensions, `node:` prefix)
@@ -172,7 +177,7 @@ Create an MCP tool handler for `mdsel_index` that:
 
 // CRITICAL: Zod schemas in MCP SDK - use raw shape objects with .describe()
 const schema = {
-  files: z.array(z.string()).describe('Array of absolute file paths')
+  files: z.array(z.string()).describe('Array of absolute file paths'),
 };
 
 // CRITICAL: Mock placement - MUST be at top level, not inside tests
@@ -187,7 +192,7 @@ const MDSEL_PATH = '/home/dustin/.local/bin/mdsel';
 // CRITICAL: Tool response format for MCP
 return {
   content: [{ type: 'text', text: result.stdout }],
-  isError: !result.success
+  isError: !result.success,
 };
 
 // CRITICAL: execMdsel already appends '--json' automatically per mdsel-cli.ts line 19
@@ -644,6 +649,7 @@ rm test-handler.mjs
 **Confidence Score**: 9/10 for one-pass implementation success
 
 **Reasoning**:
+
 - Complete codebase patterns documented with specific line references
 - MCP SDK usage patterns confirmed from SDK examples
 - Test mocking pattern matches existing test file exactly
@@ -651,6 +657,7 @@ rm test-handler.mjs
 - Clear task ordering with dependencies
 
 **Risk Factors**:
+
 - mdsel CLI behavior (whether `--json` flag is auto-appended) - verify in implementation
 - TypeScript strict mode may reveal type issues not caught in review
 

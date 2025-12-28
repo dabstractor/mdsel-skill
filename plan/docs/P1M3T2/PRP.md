@@ -46,6 +46,7 @@ Create the mdsel_select MCP tool handler across three subtasks:
 ### P1.M3.T2.S1: Define mdsel_select Input Schema (0.5 points)
 
 Create `src/tools/mdsel-select.ts` with:
+
 - Zod schema defining `selector` (string) - required parameter
 - Zod schema defining `files` (array of strings) - required parameter
 - Export `MDSEL_SELECT_INPUT_SCHEMA` (raw shape for MCP SDK)
@@ -55,6 +56,7 @@ Create `src/tools/mdsel-select.ts` with:
 ### P1.M3.T2.S2: Implement handleMdselSelect Function (1 point)
 
 In `src/tools/mdsel-select.ts`:
+
 - Import `execMdsel` from `../lib/mdsel-cli.js`
 - Import `CallToolResult` type (or define inline interface)
 - Implement `handleMdselSelect(args: MdselSelectInput): Promise<CallToolResult>`
@@ -65,6 +67,7 @@ In `src/tools/mdsel-select.ts`:
 ### P1.M3.T2.S3: Write Tests for mdsel_select Handler (1 point)
 
 Create `tests/tools/mdsel-select.test.ts` with:
+
 - Mock `node:child_process` module with `vi.mock()` at top level
 - Test successful select with valid selector
 - Test select with multiple files
@@ -288,7 +291,7 @@ import { z } from 'zod';
 export const mdselSelectInputSchema = z.object({
   selector: z
     .string()
-    .describe('Selector string (e.g., \'heading:h2[0]\', \'readme::section[1]?full=true\')'),
+    .describe("Selector string (e.g., 'heading:h2[0]', 'readme::section[1]?full=true')"),
   files: z
     .array(z.string())
     .describe('Array of absolute file paths to Markdown documents to search'),
@@ -361,7 +364,7 @@ Task 2: CREATE tests/tools/mdsel-select.test.ts
 
 ### Implementation Patterns & Key Details
 
-```typescript
+````typescript
 // ==================== src/tools/mdsel-select.ts ====================
 // Complete implementation following mdsel-index.ts pattern
 
@@ -376,7 +379,7 @@ import { z } from 'zod';
 export const mdselSelectInputSchema = z.object({
   selector: z
     .string()
-    .describe('Selector string (e.g., \'heading:h2[0]\', \'readme::section[1]?full=true\')'),
+    .describe("Selector string (e.g., 'heading:h2[0]', 'readme::section[1]?full=true')"),
   files: z
     .array(z.string())
     .describe('Array of absolute file paths to Markdown documents to search'),
@@ -439,11 +442,11 @@ export async function handleMdselSelect(args: {
     isError: !result.success,
   };
 }
-```
+````
 
 ### Test Implementation Pattern
 
-```typescript
+````typescript
 // ==================== tests/tools/mdsel-select.test.ts ====================
 
 import { beforeEach, vi } from 'vitest';
@@ -643,11 +646,7 @@ describe('handleMdselSelect', () => {
   describe('error handling', () => {
     it('should return isError: true on invalid selector', async () => {
       // Arrange
-      const mockProcess = createMockProcess(
-        '',
-        'Error: Invalid selector syntax',
-        1
-      );
+      const mockProcess = createMockProcess('', 'Error: Invalid selector syntax', 1);
 
       mockSpawn.mockReturnValue(mockProcess as any);
 
@@ -664,11 +663,7 @@ describe('handleMdselSelect', () => {
 
     it('should return isError: true when file not found', async () => {
       // Arrange
-      const mockProcess = createMockProcess(
-        '',
-        'Error: Cannot read file: /path/to/missing.md',
-        2
-      );
+      const mockProcess = createMockProcess('', 'Error: Cannot read file: /path/to/missing.md', 2);
 
       mockSpawn.mockReturnValue(mockProcess as any);
 
@@ -866,7 +861,7 @@ describe('handleMdselSelect', () => {
     });
   });
 });
-```
+````
 
 ### Integration Points
 

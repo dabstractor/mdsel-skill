@@ -203,7 +203,7 @@ export class MdselTimeoutError extends Error {
 
 ## Function Signature
 
-```typescript
+````typescript
 /**
  * Execute mdsel CLI command and capture output
  *
@@ -221,11 +221,8 @@ export class MdselTimeoutError extends Error {
  * }
  * ```
  */
-export async function execMdsel(
-  args: string[],
-  options?: MdselExecOptions
-): Promise<MdselResult>;
-```
+export async function execMdsel(args: string[], options?: MdselExecOptions): Promise<MdselResult>;
+````
 
 ## Complete src/types.ts for P1.M2.T1.S1
 
@@ -320,11 +317,7 @@ import type { MdselResult } from '../../types.js';
 import { execMdsel } from '../../lib/mdsel-cli.js';
 
 async function handleMdselIndex(args: { files: string[] }) {
-  const result: MdselResult = await execMdsel([
-    'index',
-    ...args.files,
-    '--json'
-  ]);
+  const result: MdselResult = await execMdsel(['index', ...args.files, '--json']);
 
   return {
     content: [{ type: 'text', text: result.stdout }],

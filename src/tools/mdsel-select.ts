@@ -1,5 +1,6 @@
 import { execMdsel } from '../lib/mdsel-cli.js';
 import type { MdselResult } from '../types.js';
+import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 
 /**
@@ -9,7 +10,7 @@ import { z } from 'zod';
 export const mdselSelectInputSchema = z.object({
   selector: z
     .string()
-    .describe('Selector string (e.g., \'heading:h2[0]\', \'readme::section[1]?full=true\')'),
+    .describe("Selector string (e.g., 'heading:h2[0]', 'readme::section[1]?full=true')"),
   files: z
     .array(z.string())
     .describe('Array of absolute file paths to Markdown documents to search'),
@@ -26,12 +27,9 @@ export const MDSEL_SELECT_INPUT_SCHEMA = mdselSelectInputSchema.shape;
 export type MdselSelectInput = z.infer<typeof mdselSelectInputSchema>;
 
 /**
- * MCP Tool Result type (from SDK)
+ * Re-export CallToolResult for convenience
  */
-interface CallToolResult {
-  content: Array<{ type: 'text'; text: string }>;
-  isError?: boolean;
-}
+export type { CallToolResult };
 
 /**
  * Handle mdsel_select tool call

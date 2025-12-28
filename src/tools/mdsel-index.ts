@@ -1,5 +1,6 @@
 import { execMdsel } from '../lib/mdsel-cli.js';
 import type { MdselResult } from '../types.js';
+import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 
 /**
@@ -23,12 +24,9 @@ export const MDSEL_INDEX_INPUT_SCHEMA = mdselIndexInputSchema.shape;
 export type MdselIndexInput = z.infer<typeof mdselIndexInputSchema>;
 
 /**
- * MCP Tool Result type (from SDK)
+ * Re-export CallToolResult for convenience
  */
-interface CallToolResult {
-  content: Array<{ type: 'text'; text: string }>;
-  isError?: boolean;
-}
+export type { CallToolResult };
 
 /**
  * Handle mdsel_index tool call
@@ -47,9 +45,7 @@ interface CallToolResult {
  * // result.content[0].text contains JSON from mdsel
  * ```
  */
-export async function handleMdselIndex(args: {
-  files: string[];
-}): Promise<CallToolResult> {
+export async function handleMdselIndex(args: { files: string[] }): Promise<CallToolResult> {
   // Call mdsel CLI with index command
   // Note: mdsel index outputs JSON by default, no --json flag needed
   const result: MdselResult = await execMdsel(['index', ...args.files]);

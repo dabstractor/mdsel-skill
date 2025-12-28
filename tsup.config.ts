@@ -9,4 +9,8 @@ export default defineConfig({
   sourcemap: true,
   splitting: false,
   minify: false,
+  // Add shebang to all JS outputs (only index.js is used as CLI)
+  banner: {
+    js: '#!/usr/bin/env node',
+  },
 });
