@@ -10,14 +10,14 @@
 
 This project exists to:
 
-* Expose `mdsel` as first-class Claude Code tools
-* Actively discourage misuse of Claude’s default `Read` tool on Markdown files
-* Enforce a selector-first access pattern while remaining **stateless**, **thin**, and **mechanical**
-* Preserve the core philosophy of `mdsel`: minimal tokens, no inference, no summarization
+- Expose `mdsel` as first-class Claude Code tools
+- Actively discourage misuse of Claude’s default `Read` tool on Markdown files
+- Enforce a selector-first access pattern while remaining **stateless**, **thin**, and **mechanical**
+- Preserve the core philosophy of `mdsel`: minimal tokens, no inference, no summarization
 
 This project does **not** modify `mdsel`.
 It **does not** reinterpret document semantics.
-It exists solely to shape *agent behavior*.
+It exists solely to shape _agent behavior_.
 
 ---
 
@@ -30,10 +30,10 @@ Claude Code already has powerful primitives (`Read`, tools, system messages).
 
 This tool:
 
-* Nudges
-* Reminds
-* Conditions
-* Never enforces via hard failure
+- Nudges
+- Reminds
+- Conditions
+- Never enforces via hard failure
 
 ---
 
@@ -41,9 +41,9 @@ This tool:
 
 For Markdown documents above a configurable size threshold:
 
-* Using `Read` is considered **incorrect usage**
-* Claude is reminded **every time** this occurs
-* Selector-based access is treated as **required**, not optional
+- Using `Read` is considered **incorrect usage**
+- Claude is reminded **every time** this occurs
+- Selector-based access is treated as **required**, not optional
 
 ---
 
@@ -51,11 +51,11 @@ For Markdown documents above a configurable size threshold:
 
 `mdsel-claude` is intentionally minimal:
 
-* No Markdown parsing
-* No selector validation
-* No caching
-* No heuristics beyond word-count gating
-* No state
+- No Markdown parsing
+- No selector validation
+- No caching
+- No heuristics beyond word-count gating
+- No state
 
 All real work is delegated to `mdsel`.
 
@@ -63,13 +63,12 @@ All real work is delegated to `mdsel`.
 
 ## 3. Dependency Model
 
-* **Direct dependency**: `mdsel`
-* `mdsel` is authoritative for:
-
-  * Parsing
-  * Selector grammar
-  * Output format
-  * Error behavior
+- **Direct dependency**: `mdsel`
+- `mdsel` is authoritative for:
+  - Parsing
+  - Selector grammar
+  - Output format
+  - Error behavior
 
 `mdsel-claude` must not diverge from `mdsel` semantics in any way.
 
@@ -92,9 +91,9 @@ Return a selector inventory for one or more Markdown documents.
 
 #### Behavior
 
-* Passes file paths directly to `mdsel index`
-* Returns structured JSON exactly as emitted by `mdsel`
-* No post-processing
+- Passes file paths directly to `mdsel index`
+- Returns structured JSON exactly as emitted by `mdsel`
+- No post-processing
 
 #### Intended Usage
 
@@ -110,11 +109,11 @@ Retrieve specific document content using declarative selectors.
 
 #### Behavior
 
-* Passes selectors directly to `mdsel select`
-* Returns structured JSON exactly as emitted by `mdsel`
-* No summarization
-* No interpretation
-* No transformation
+- Passes selectors directly to `mdsel select`
+- Returns structured JSON exactly as emitted by `mdsel`
+- No summarization
+- No interpretation
+- No transformation
 
 ---
 
@@ -140,23 +139,22 @@ MDSEL_MIN_WORDS
 
 When a Markdown file is accessed:
 
-* If total word count **≤ MDSEL_MIN_WORDS**
+- If total word count **≤ MDSEL_MIN_WORDS**
+  - The file may be returned in full
+  - `mdsel` may be bypassed
+  - No reminder is issued
 
-  * The file may be returned in full
-  * `mdsel` may be bypassed
-  * No reminder is issued
-* If total word count **> MDSEL_MIN_WORDS**
-
-  * Selector-based access is required
-  * `Read` usage is considered incorrect
-  * Reminder hook fires **every time**
+- If total word count **> MDSEL_MIN_WORDS**
+  - Selector-based access is required
+  - `Read` usage is considered incorrect
+  - Reminder hook fires **every time**
 
 Word count is:
 
-* Mechanical
-* Based on whitespace-delimited tokens
-* Not semantic
-* Not cached across sessions
+- Mechanical
+- Based on whitespace-delimited tokens
+- Not semantic
+- Not cached across sessions
 
 ---
 
@@ -174,9 +172,9 @@ A reminder is injected when **all** of the following are true:
 
 ### 6.2 Reminder Frequency
 
-* Fires **every time**
-* No suppression
-* No “first warning only” behavior
+- Fires **every time**
+- No suppression
+- No “first warning only” behavior
 
 Repetition is intentional and considered a feature.
 
@@ -186,11 +184,11 @@ Repetition is intentional and considered a feature.
 
 Reminder messages must be:
 
-* Short
-* Neutral
-* Identical every time
-* Non-judgmental
-* Non-negotiable in tone
+- Short
+- Neutral
+- Identical every time
+- Non-judgmental
+- Non-negotiable in tone
 
 Canonical wording:
 
@@ -207,13 +205,13 @@ No variation is allowed.
 
 The tool description must:
 
-* Explicitly state that `Read` should not be used for large Markdown files
-* Include a minimal selector grammar
-* Describe the canonical usage sequence:
-
+- Explicitly state that `Read` should not be used for large Markdown files
+- Include a minimal selector grammar
+- Describe the canonical usage sequence:
   1. `mdsel_index`
   2. `mdsel_select`
-* Avoid philosophy, justification, or marketing language
+
+- Avoid philosophy, justification, or marketing language
 
 The tool description is considered **behavior-shaping infrastructure** and must be treated as part of the system design.
 
@@ -223,18 +221,18 @@ The tool description is considered **behavior-shaping infrastructure** and must 
 
 ### 8.1 Selector Errors
 
-* Invalid selectors
-* Ambiguous selectors
-* Missing documents
+- Invalid selectors
+- Ambiguous selectors
+- Missing documents
 
 All such errors are returned **verbatim** from `mdsel`.
 
 `mdsel-claude` must not:
 
-* Catch
-* Rewrite
-* Explain
-* Suggest fixes
+- Catch
+- Rewrite
+- Explain
+- Suggest fixes
 
 ---
 
@@ -246,10 +244,10 @@ If `mdsel` returns partial results, they are passed through unchanged.
 
 ## 9. Statelessness
 
-* No session memory
-* No cached indices
-* No retained document knowledge
-* Each invocation is independent
+- No session memory
+- No cached indices
+- No retained document knowledge
+- Each invocation is independent
 
 ---
 
@@ -257,13 +255,13 @@ If `mdsel` returns partial results, they are passed through unchanged.
 
 This project will **not**:
 
-* Summarize content
-* Interpret semantics
-* Validate selectors
-* Track agent behavior
-* Persist state
-* Optimize performance beyond delegation
-* Introduce new selector concepts
+- Summarize content
+- Interpret semantics
+- Validate selectors
+- Track agent behavior
+- Persist state
+- Optimize performance beyond delegation
+- Introduce new selector concepts
 
 ---
 
@@ -271,8 +269,7 @@ This project will **not**:
 
 `mdsel-claude` is successful if:
 
-* Claude Code agents stop reading full Markdown files
-* Agents reliably index before selecting
-* Token usage drops significantly for large documents
-* No divergence from `mdsel` output is observed
-
+- Claude Code agents stop reading full Markdown files
+- Agents reliably index before selecting
+- Token usage drops significantly for large documents
+- No divergence from `mdsel` output is observed
