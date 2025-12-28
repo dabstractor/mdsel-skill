@@ -1,7 +1,8 @@
-import { execMdsel } from '../lib/mdsel-cli.js';
-import type { MdselResult } from '../types.js';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
+
+import { execMdsel } from '../lib/mdsel-cli.js';
+import type { MdselResult } from '../types.js';
 
 /**
  * Input schema for mdsel_select tool

@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest';
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+import { describe, it, expect } from 'vitest';
+
 import { server } from '../../src/index.js';
 
 // Tool descriptions for validation

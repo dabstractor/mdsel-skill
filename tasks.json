@@ -460,7 +460,7 @@
           "type": "Milestone",
           "id": "P3.M1",
           "title": "End-to-End Validation",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Validate complete system behavior against PRD success criteria.",
           "tasks": [
             {
@@ -510,14 +510,14 @@
               "type": "Task",
               "id": "P3.M1.T2",
               "title": "Code Quality and CI Setup",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Configure linting, formatting, and continuous integration.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P3.M1.T2.S1",
                   "title": "Configure ESLint and Prettier",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M1.T1.S1"
@@ -528,7 +528,7 @@
                   "type": "Subtask",
                   "id": "P3.M1.T2.S2",
                   "title": "Add prepublishOnly and quality scripts",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P3.M1.T2.S1"

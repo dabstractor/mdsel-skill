@@ -8,8 +8,10 @@
  * "No divergence from mdsel output"
  */
 
-import { beforeEach, vi } from 'vitest';
 import { spawn } from 'node:child_process';
+
+import { beforeEach, vi } from 'vitest';
+
 import { handleMdselIndex } from '../../src/tools/mdsel-index.js';
 import { handleMdselSelect } from '../../src/tools/mdsel-select.js';
 
@@ -406,9 +408,7 @@ describe('P3.M1.T1.S1: mdsel Output Passthrough Fidelity', () => {
 
       // Assert: CRITICAL - Byte-for-byte verbatim passthrough
       expect(result.content[0].text).toBe(originalOutput);
-      expect(Buffer.byteLength(result.content[0].text)).toBe(
-        Buffer.byteLength(originalOutput)
-      );
+      expect(Buffer.byteLength(result.content[0].text)).toBe(Buffer.byteLength(originalOutput));
     });
 
     it('should validate PRD Section 11: byte-for-byte verbatim passthrough for mdsel_select', async () => {
@@ -426,9 +426,7 @@ describe('P3.M1.T1.S1: mdsel Output Passthrough Fidelity', () => {
 
       // Assert: CRITICAL - Byte-for-byte verbatim passthrough
       expect(result.content[0].text).toBe(originalOutput);
-      expect(Buffer.byteLength(result.content[0].text)).toBe(
-        Buffer.byteLength(originalOutput)
-      );
+      expect(Buffer.byteLength(result.content[0].text)).toBe(Buffer.byteLength(originalOutput));
     });
 
     it('should never add whitespace or formatting to output', async () => {

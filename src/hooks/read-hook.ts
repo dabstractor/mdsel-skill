@@ -9,6 +9,7 @@
 
 import { readFileSync } from 'fs';
 import { extname } from 'path';
+
 import { countWords, getWordThreshold } from '../lib/word-count.js';
 
 // CRITICAL: Types must be local to hook file (not in shared types)

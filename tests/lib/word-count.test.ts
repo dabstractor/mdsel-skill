@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+
 import { countWords, getWordThreshold } from '../../src/lib/word-count.js';
 
 describe('countWords', () => {

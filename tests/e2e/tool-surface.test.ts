@@ -7,8 +7,9 @@
  * CRITICAL: PRD Section 4 states "Exactly two tools" - no more, no fewer.
  */
 
-import { describe, it, expect } from 'vitest';
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+import { describe, it, expect } from 'vitest';
+
 import { server } from '../../src/index.js';
 
 describe('P3.M1.T1.S3: Tool Surface Validation', () => {

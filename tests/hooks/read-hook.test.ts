@@ -5,8 +5,10 @@
  * and injects behavioral reminders for large Markdown files.
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { readFileSync } from 'fs';
+
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+
 import { countWords, getWordThreshold } from '../../src/lib/word-count.js';
 
 // CRITICAL: Mock at top level, not inside tests
@@ -63,7 +65,7 @@ describe('read-hook', () => {
 
     // Mock stdin
     const mockStdinChunks = [inputJson];
-    vi.spyOn(process.stdin, ' Symbol.asyncIterator').mockReturnValue(
+    vi.spyOn(process.stdin, Symbol.asyncIterator).mockReturnValue(
       (async function* () {
         for (const chunk of mockStdinChunks) {
           yield chunk;

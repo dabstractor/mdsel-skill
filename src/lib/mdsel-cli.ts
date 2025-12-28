@@ -1,4 +1,5 @@
 import { spawn } from 'node:child_process';
+
 import type { MdselResult, MdselExecOptions } from '../types.js';
 
 // CRITICAL: Use absolute path to mdsel CLI

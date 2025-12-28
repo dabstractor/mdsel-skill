@@ -1,5 +1,7 @@
-import { beforeEach, vi } from 'vitest';
 import { spawn } from 'node:child_process';
+
+import { beforeEach, vi } from 'vitest';
+
 import { handleMdselSelect } from '../../src/tools/mdsel-select.js';
 
 // CRITICAL: Mock at top level, not inside tests

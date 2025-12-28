@@ -8,9 +8,11 @@
  * the unit tests in tests/hooks/read-hook.test.ts.
  */
 
-import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
+
+import { describe, it, expect } from 'vitest';
+
 import { countWords } from '../../src/lib/word-count.js';
 
 // CRITICAL: EXACT reminder message from PRD Section 6.3
@@ -145,7 +147,7 @@ describe('P3.M1.T1.S2: Reminder Hook Consistency', () => {
       const content = readFileSync(hookSourcePath, 'utf-8');
 
       // Assert: Verify early return for non-.md files
-      expect(content).toContain("console.log(JSON.stringify(output))");
+      expect(content).toContain('console.log(JSON.stringify(output))');
       expect(content).toContain('process.exit(0)');
     });
   });
@@ -168,7 +170,7 @@ describe('P3.M1.T1.S2: Reminder Hook Consistency', () => {
 
       // Assert: Verify silent failure in catch block
       expect(content).toContain('// PATTERN: Silent failure');
-      expect(content).toContain("// Let Read tool handle the error");
+      expect(content).toContain('// Let Read tool handle the error');
     });
 
     it('should always exit with code 0', () => {

@@ -7,11 +7,13 @@
 **Feature Goal**: Create comprehensive end-to-end test suite validating all PRD success criteria for the mdsel-claude MCP server integration.
 
 **Deliverable**: Three new E2E test files validating:
+
 1. mdsel CLI output passthrough fidelity (byte-for-byte verbatim passthrough)
 2. Reminder hook consistency (fires every time with exact message)
 3. Tool surface validation (exactly 2 tools exposed with correct descriptions)
 
 **Success Definition**: All E2E tests pass, validating that:
+
 - mdsel output is passed through unchanged (no transformation, no parsing)
 - Reminder hook fires consistently for large .md files with exact message from PRD
 - Exactly 2 tools are exposed with behavioral guidance in descriptions
@@ -23,11 +25,13 @@
 **Use Case**: Validate the complete integration of mdsel-claude MCP server before release
 
 **User Journey**:
+
 1. Developer runs `npm run test:e2e`
 2. All E2E tests execute and pass
 3. CI/CD pipeline validates no regressions in PRD success criteria
 
 **Pain Points Addressed**:
+
 - Lack of validation that mdsel output is truly passed verbatim
 - Uncertainty whether hook fires consistently
 - No automated verification of PRD requirements
@@ -56,6 +60,7 @@ Create end-to-end tests that validate the complete behavior of the mdsel-claude 
 **Question**: "If someone knew nothing about this codebase, would they have everything needed to implement this successfully?"
 
 **Answer**: Yes - this PRP provides:
+
 - Complete file structure with exact paths
 - Existing test patterns to follow
 - MCP SDK testing patterns
@@ -405,12 +410,14 @@ const EXACT_REMINDER = `This is a Markdown file over the configured size thresho
 Use mdsel_index and mdsel_select instead of Read.`;
 
 it('should use exact reminder message from PRD', async () => {
-  const result = await executeHook(JSON.stringify({
-    session_id: 'test',
-    hook_event_name: 'PreToolUse',
-    tool_name: 'Read',
-    tool_input: { file_path: '/path/to/large.md' },
-  }));
+  const result = await executeHook(
+    JSON.stringify({
+      session_id: 'test',
+      hook_event_name: 'PreToolUse',
+      tool_name: 'Read',
+      tool_input: { file_path: '/path/to/large.md' },
+    })
+  );
 
   expect(result.systemMessage).toBe(EXACT_REMINDER);
 });
@@ -598,6 +605,7 @@ npm test -- tests/e2e/tool-surface.test.ts
 
 ```markdown
 <!-- tests/e2e/fixtures/sample-docs/small.md (< 200 words) -->
+
 # Small Document
 
 This is a small markdown file with fewer than two hundred words. It should not trigger the reminder hook when read.
@@ -615,6 +623,7 @@ Total word count is approximately fifty words.
 
 ```markdown
 <!-- tests/e2e/fixtures/sample-docs/large.md (> 200 words) -->
+
 # Large Document
 
 This is a large markdown file with more than two hundred words. It should trigger the reminder hook when read using the Read tool. The purpose of this file is to test the word count gating logic in the reminder hook system.
@@ -681,6 +690,7 @@ This document exceeds the threshold and should trigger the reminder.
 **Rating: 9/10** for one-pass implementation success
 
 **Rationale**:
+
 - Comprehensive research completed with existing test patterns identified
 - Clear task dependencies defined
 - Specific file paths and patterns provided

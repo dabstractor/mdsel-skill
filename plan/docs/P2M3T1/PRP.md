@@ -256,8 +256,7 @@ _If someone knew nothing about this codebase, would they have everything needed 
 Title: mdsel-claude (one-line description)
 Badge: npm version, license (optional)
 
-Sections:
-  1. Overview (1-2 sentences)
+Sections: 1. Overview (1-2 sentences)
   2. Prerequisites (Node.js version, mdsel CLI)
   3. Installation (npm install, build)
   4. MCP Server Configuration
@@ -276,8 +275,7 @@ Style:
 
 Purpose: Example configuration file with comments
 
-Contains:
-  1. MCP server configuration (mcpServers section)
+Contains: 1. MCP server configuration (mcpServers section)
   2. Hook configuration (hooks section)
   3. Inline comments explaining each field
   4. Placeholder paths for user to replace
@@ -342,10 +340,13 @@ Task 3: VERIFY build and test documentation
 
 ### Implementation Patterns & Key Details
 
-```markdown
+````markdown
 # ============================================
+
 # Pattern 1: README.md Structure
+
 # ============================================
+
 # File: README.md
 
 # mdsel-claude
@@ -374,8 +375,10 @@ npm install
 # Build the project
 npm run build
 ```
+````
 
 The build process creates:
+
 - `dist/index.js` - MCP server entry point
 - `dist/hooks/read-hook.js` - PreToolUse hook script
 
@@ -424,11 +427,13 @@ Add the PreToolUse hook to the same `.claude/settings.json` file:
 ### Hook Behavior
 
 The hook fires when **all** of the following are true:
+
 - Claude invokes the `Read` tool
 - Target file has `.md` extension
 - File word count exceeds `MDSEL_MIN_WORDS` (default: 200)
 
 When triggered, the hook displays:
+
 ```
 This is a Markdown file over the configured size threshold.
 Use mdsel_index and mdsel_select instead of Read.
@@ -438,11 +443,12 @@ The hook **never blocks** the Read action - it only reminds.
 
 ## Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `MDSEL_MIN_WORDS` | Word count threshold for hook reminders | 200 |
+| Variable          | Description                             | Default |
+| ----------------- | --------------------------------------- | ------- |
+| `MDSEL_MIN_WORDS` | Word count threshold for hook reminders | 200     |
 
 Set via shell:
+
 ```bash
 export MDSEL_MIN_WORDS=200
 ```
@@ -454,6 +460,7 @@ Or configure in `.claude/settings.json` under the MCP server `env` section.
 For large Markdown files, use the two-tool workflow:
 
 1. **Index the file** to discover structure:
+
    ```
    mdsel_index with files: ["path/to/document.md"]
    ```
@@ -468,19 +475,23 @@ Small files (at or below threshold) may be read normally without reminders.
 ## Troubleshooting
 
 **Hook not firing:**
+
 - Verify `npm run build` was run
 - Check the path to `dist/hooks/read-hook.js` is absolute
 - Confirm file has `.md` extension
 - Verify word count exceeds threshold
 
 **MCP tools not available:**
+
 - Check MCP server configuration in `.claude/settings.json`
 - Verify the path to `dist/index.js` is correct
 - Restart Claude Code after configuration changes
 
 **Reminder message variations:**
+
 - The message must be exactly as specified in PRD Section 6.3
 - No variation is allowed - same text every time
+
 ```
 
 # ============================================
@@ -526,7 +537,8 @@ Small files (at or below threshold) may be read normally without reminders.
   }
 }
 ```
-```
+
+````
 
 ### Integration Points
 
@@ -548,13 +560,13 @@ DEPENDENCIES:
   - existing: dist/ build output (requires npm run build)
   - documentation: PRD.md (for philosophy and requirements)
   - documentation: plan/docs/architecture/hook_system.md (for hook spec)
-```
+````
 
 ## Validation Loop
 
 ### Level 1: Syntax & Style (Documentation Quality)
 
-```bash
+````bash
 # Verify README.md exists and is readable
 test -f README.md && echo "README.md exists" || echo "README.md missing"
 
@@ -573,7 +585,7 @@ cat README.md | sed -n '/```json/,/```/p' | sed '1d;$d' | jq . > /dev/null 2>&1 
 test -f .claude/settings.json.example && echo "Example config exists" || echo "Example config missing"
 
 # Expected: All checks pass, documentation is complete and valid
-```
+````
 
 ### Level 2: Content Validation (Instruction Clarity)
 

@@ -1,5 +1,7 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { spawn } from 'node:child_process';
+
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+
 import { execMdsel } from '../../src/lib/mdsel-cli.js';
 
 // CRITICAL: Mock at top level, not inside tests
