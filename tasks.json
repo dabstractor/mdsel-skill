@@ -298,21 +298,21 @@
           "type": "Milestone",
           "id": "P2.M1",
           "title": "Word Count Gating Logic",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Implement word counting utility and threshold comparison logic.",
           "tasks": [
             {
               "type": "Task",
               "id": "P2.M1.T1",
               "title": "Implement Word Count Utility",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create mechanical word counter based on whitespace-delimited tokens.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P2.M1.T1.S1",
                   "title": "Implement countWords function",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P1.M1.T1.S5"
@@ -323,7 +323,7 @@
                   "type": "Subtask",
                   "id": "P2.M1.T1.S2",
                   "title": "Implement getWordThreshold function",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P2.M1.T1.S1"
@@ -334,7 +334,7 @@
                   "type": "Subtask",
                   "id": "P2.M1.T1.S3",
                   "title": "Write tests for word count utilities",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P2.M1.T1.S2"
