@@ -94,7 +94,7 @@
           "type": "Milestone",
           "id": "P1.M2",
           "title": "MCP Server Foundation",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Implement the MCP server skeleton and CLI executor for spawning mdsel processes.",
           "tasks": [
             {
@@ -132,14 +132,14 @@
               "type": "Task",
               "id": "P1.M2.T2",
               "title": "Implement CLI Executor",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create the child process executor that spawns mdsel commands and captures output.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M2.T2.S1",
                   "title": "Define ExecutorResult interface",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P1.M1.T1.S6"
@@ -150,7 +150,7 @@
                   "type": "Subtask",
                   "id": "P1.M2.T2.S2",
                   "title": "Implement executeMdsel spawn function",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 2,
                   "dependencies": [
                     "P1.M2.T2.S1"
@@ -161,7 +161,7 @@
                   "type": "Subtask",
                   "id": "P1.M2.T2.S3",
                   "title": "Add executor unit tests with mocked spawn",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 2,
                   "dependencies": [
                     "P1.M2.T2.S2"
