@@ -32,3 +32,6 @@ Thumbs.db
 
 # TypeScript
 *.tsbuildinfo
+
+# Local hooks (user-specific hook configurations)
+hooks/

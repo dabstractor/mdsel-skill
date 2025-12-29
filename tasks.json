@@ -393,14 +393,14 @@
               "type": "Task",
               "id": "P2.M2.T1",
               "title": "Implement Hook Script",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create the bash hook script that fires on Read tool invocation for Markdown files.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P2.M2.T1.S1",
                   "title": "Create PreToolUse hook script structure",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P2.M1.T1.S1"
@@ -411,7 +411,7 @@
                   "type": "Subtask",
                   "id": "P2.M2.T1.S2",
                   "title": "Implement Markdown file detection and word count check",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 2,
                   "dependencies": [
                     "P2.M2.T1.S1",
@@ -423,7 +423,7 @@
                   "type": "Subtask",
                   "id": "P2.M2.T1.S3",
                   "title": "Implement canonical reminder response",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P2.M2.T1.S2"
