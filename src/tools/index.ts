@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { executeMdsel } from '../executor.js';
-import { server } from '../index.js';
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
+import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+import { MdselSelectInputSchema, mdselSelectHandler, mdselSelectTool } from './select.js';
 
 // ============================================================
 // ZOD SCHEMA - Input validation for mdsel_index tool
@@ -87,42 +88,69 @@ const mdselIndexTool = {
   }
 };
 
-// Register tools/list handler
-server.setRequestHandler(ListToolsRequestSchema, async () => {
-  return {
-    tools: [mdselIndexTool]
-  };
-});
+/**
+ * Register all mdsel tools with the MCP server instance.
+ * This function is called from src/index.ts after the server is created.
+ *
+ * @param server - The MCP server instance to register tools with
+ */
+export function registerTools(server: Server): void {
+  // Register tools/list handler
+  server.setRequestHandler(ListToolsRequestSchema, async () => {
+    return {
+      tools: [mdselIndexTool, mdselSelectTool]
+    };
+  });
 
-// Register tools/call handler
-server.setRequestHandler(CallToolRequestSchema, async (request) => {
-  const { name, arguments: args } = request.params;
+  // Register tools/call handler
+  server.setRequestHandler(CallToolRequestSchema, async (request) => {
+    const { name, arguments: args } = request.params;
 
-  // Handle mdsel_index tool calls
-  if (name === 'mdsel_index') {
-    // Validate input using Zod schema
-    const validationResult = MdselIndexInputSchema.safeParse(args);
+    // Handle mdsel_index tool calls
+    if (name === 'mdsel_index') {
+      // Validate input using Zod schema
+      const validationResult = MdselIndexInputSchema.safeParse(args);
 
-    if (!validationResult.success) {
-      return {
-        content: [{
-          type: 'text',
-          text: `Input validation error: ${validationResult.error.errors.map(e => e.message).join(', ')}`
-        }],
-        isError: true
-      };
+      if (!validationResult.success) {
+        return {
+          content: [{
+            type: 'text',
+            text: `Input validation error: ${validationResult.error.errors.map(e => e.message).join(', ')}`
+          }],
+          isError: true
+        };
+      }
+
+      // Call the handler with validated input
+      return mdselIndexHandler(validationResult.data);
     }
 
-    // Call the handler with validated input
-    return mdselIndexHandler(validationResult.data);
-  }
+    // Handle mdsel_select tool calls
+    if (name === 'mdsel_select') {
+      // Validate input using Zod schema
+      const validationResult = MdselSelectInputSchema.safeParse(args);
 
-  // Unknown tool
-  return {
-    content: [{
-      type: 'text',
-      text: `Unknown tool: ${name}`
-    }],
-    isError: true
-  };
-});
+      if (!validationResult.success) {
+        return {
+          content: [{
+            type: 'text',
+            text: `Input validation error: ${validationResult.error.errors.map(e => e.message).join(', ')}`
+          }],
+          isError: true
+        };
+      }
+
+      // Call the handler with validated input
+      return mdselSelectHandler(validationResult.data);
+    }
+
+    // Unknown tool
+    return {
+      content: [{
+        type: 'text',
+        text: `Unknown tool: ${name}`
+      }],
+      isError: true
+    };
+  });
+}

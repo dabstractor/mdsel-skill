@@ -227,14 +227,14 @@
               "type": "Task",
               "id": "P1.M3.T2",
               "title": "Implement mdsel_select Tool",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create the mdsel_select tool that retrieves content using declarative selectors.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M3.T2.S1",
                   "title": "Define Zod schema for mdsel_select input",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M1.T1.S3"
@@ -245,7 +245,7 @@
                   "type": "Subtask",
                   "id": "P1.M3.T2.S2",
                   "title": "Implement mdsel_select tool handler",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 2,
                   "dependencies": [
                     "P1.M3.T2.S1",
@@ -258,7 +258,7 @@
                   "type": "Subtask",
                   "id": "P1.M3.T2.S3",
                   "title": "Add mdsel_select tool tests",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 2,
                   "dependencies": [
                     "P1.M3.T2.S2"
