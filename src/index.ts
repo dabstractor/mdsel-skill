@@ -1,13 +1,21 @@
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 
-// Create MCP server instance
-export const server = new Server({
-  name: "mdsel-claude",
-  version: "1.0.0"
-});
+// Create MCP server instance with tools capability
+export const server = new Server(
+  {
+    name: "mdsel-claude",
+    version: "1.0.0"
+  },
+  {
+    capabilities: {
+      tools: {}
+    }
+  }
+);
 
-// Tools will be registered in P1.M2.T1 and P1.M3
+// Import tools to register them with the server
+import './tools/index.js';
 
 // Main function to start the MCP server
 async function main(): Promise<void> {
