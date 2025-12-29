@@ -308,7 +308,7 @@
       "type": "Phase",
       "id": "P2",
       "title": "Behavioral Conditioning: Reminder Hook System",
-      "status": "Planned",
+      "status": "Complete",
       "description": "Implement the Read tool interception hook that fires reminders when Claude accesses large Markdown files directly instead of using selectors.",
       "milestones": [
         {
@@ -386,7 +386,7 @@
           "type": "Milestone",
           "id": "P2.M2",
           "title": "PreToolUse Hook Implementation",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Create the hook script that intercepts Read tool calls and injects reminders for large Markdown files.",
           "tasks": [
             {
@@ -436,14 +436,14 @@
               "type": "Task",
               "id": "P2.M2.T2",
               "title": "Hook Installation Documentation",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Document how to install the hook in the user's Claude Code configuration.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P2.M2.T2.S1",
                   "title": "Add hook installation instructions to README",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P2.M2.T1.S3"
