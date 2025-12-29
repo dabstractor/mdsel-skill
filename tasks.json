@@ -322,14 +322,14 @@
               "type": "Task",
               "id": "P2.M1.T1",
               "title": "Implement Configuration Management",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create utility for loading and validating MDSEL_MIN_WORDS environment variable.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P2.M1.T1.S1",
                   "title": "Implement loadConfig utility function",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M1.T1.S6"
@@ -340,7 +340,7 @@
                   "type": "Subtask",
                   "id": "P2.M1.T1.S2",
                   "title": "Add config utility tests",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P2.M1.T1.S1"
