@@ -121,14 +121,14 @@
               "type": "Task",
               "id": "P1.M2.T1",
               "title": "Define mdsel Response Types",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create TypeScript type definitions that match mdsel's JSON output structures.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M2.T1.S1",
                   "title": "Create CLIResponse and error types",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M1.T2.S2"
@@ -139,7 +139,7 @@
                   "type": "Subtask",
                   "id": "P1.M2.T1.S2",
                   "title": "Create index and select data types",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M2.T1.S1"
