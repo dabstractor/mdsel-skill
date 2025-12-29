@@ -315,7 +315,7 @@
           "type": "Milestone",
           "id": "P2.M1",
           "title": "Word Count Gating Utility",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Implement the mechanical word counting logic and configuration management.",
           "tasks": [
             {
@@ -353,14 +353,14 @@
               "type": "Task",
               "id": "P2.M1.T2",
               "title": "Implement Word Count Utility",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create the mechanical word counting function based on whitespace-delimited tokens.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P2.M1.T2.S1",
                   "title": "Implement countWords function",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M1.T1.S6"
@@ -371,7 +371,7 @@
                   "type": "Subtask",
                   "id": "P2.M1.T2.S2",
                   "title": "Add word count utility tests",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P2.M1.T2.S1"
