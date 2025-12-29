@@ -1,0 +1,29 @@
+{
+  "name": "mdsel-claude",
+  "version": "1.0.0",
+  "description": "MCP server exposing mdsel CLI as Claude Code tools",
+  "type": "module",
+  "main": "./dist/server.mjs",
+  "bin": {
+    "mdsel-claude": "./dist/server.mjs"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "start": "node dist/server.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^2.0.0"
+  }
+}
