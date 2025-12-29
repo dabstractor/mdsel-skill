@@ -4,7 +4,7 @@
       "type": "Phase",
       "id": "P1",
       "title": "MVP: Core MCP Server with Two Tools",
-      "status": "Planned",
+      "status": "Complete",
       "description": "Deliver a minimal, functional MCP server exposing mdsel_index and mdsel_select tools to Claude Code. This phase establishes the foundational architecture and tool surface as defined in the PRD.",
       "milestones": [
         {
@@ -176,7 +176,7 @@
           "type": "Milestone",
           "id": "P1.M3",
           "title": "Tool Implementation",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Implement the two tools (mdsel_index and mdsel_select) with Zod validation and proper descriptions.",
           "tasks": [
             {
@@ -271,14 +271,14 @@
               "type": "Task",
               "id": "P1.M3.T3",
               "title": "Integrate Tools into MCP Server",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Wire up both tools to the MCP server and verify end-to-end functionality.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M3.T3.S1",
                   "title": "Register both tools in server entry point",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M3.T1.S2",
@@ -291,7 +291,7 @@
                   "type": "Subtask",
                   "id": "P1.M3.T3.S2",
                   "title": "Add integration tests for server",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 2,
                   "dependencies": [
                     "P1.M3.T3.S1"
