@@ -2,6 +2,26 @@
   "name": "mdsel-claude",
   "version": "1.0.0",
   "description": "Claude Code adapter with behavioral enforcement for selector-based Markdown access",
+  "homepage": "https://github.com/dabstractor/mdsel-claude",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dabstractor/mdsel-claude.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dabstractor/mdsel-claude/issues"
+  },
+  "keywords": [
+    "mcp",
+    "modelcontextprotocol",
+    "mdsel",
+    "markdown",
+    "selector",
+    "claude",
+    "claude-code",
+    "cli"
+  ],
+  "author": "Dustin",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -15,7 +35,10 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE",
+    "hooks"
   ],
   "engines": {
     "node": ">=18.0.0"
@@ -45,5 +68,6 @@
     "tsup": "^8.3.5",
     "typescript": "^5.7.2",
     "vitest": "^2.1.8"
-  }
+  },
+  "mcpName": "io.github.dabstractor/mdsel-claude"
 }

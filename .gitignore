@@ -34,4 +34,5 @@ Thumbs.db
 *.tsbuildinfo
 
 # Local hooks (user-specific hook configurations)
-hooks/
+# Note: Project-provided hooks are tracked (hooks/PreToolUse.d/*.sh)
+hooks/*.local.*
