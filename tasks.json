@@ -11,7 +11,7 @@
           "type": "Milestone",
           "id": "P1.M1",
           "title": "Project Scaffolding & Build Infrastructure",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Set up the TypeScript project structure, build tooling, and MCP SDK dependencies required for server development.",
           "tasks": [
             {
@@ -80,14 +80,14 @@
               "type": "Task",
               "id": "P1.M1.T2",
               "title": "Install Dependencies and Verify Build",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Install npm dependencies and verify the build pipeline works correctly.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M1.T2.S1",
                   "title": "Install npm dependencies",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P1.M1.T1.S5"
@@ -98,7 +98,7 @@
                   "type": "Subtask",
                   "id": "P1.M1.T2.S2",
                   "title": "Create minimal server.ts and verify build",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M1.T2.S1",
