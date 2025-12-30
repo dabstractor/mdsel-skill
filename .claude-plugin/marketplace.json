@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "mdsel",
-      "source": ".",
+      "source": "./",
       "description": "Access large Markdown files using declarative selectors via the mdsel CLI"
     }
   ]
