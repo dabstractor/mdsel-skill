@@ -1,4 +1,19 @@
 {
+  "name": "mdsel-skill",
+  "version": "1.0.0",
+  "description": "Efficiently access large Markdown files using declarative selectors via the mdsel CLI",
+  "bin": {
+    "install-mdsel-skill": "./install.sh"
+  },
+  "scripts": {
+    "postinstall": "bash ./install.sh"
+  },
+  "files": [
+    "install.sh",
+    ".claude/",
+    "hooks/",
+    "README.md"
+  ],
   "dependencies": {
     "mdsel": "^0.1.1"
   }

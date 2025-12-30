@@ -218,14 +218,14 @@
               "type": "Task",
               "id": "P1.M4.T1",
               "title": "Implement Installation Script",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create a cross-platform installation script that detects platforms and configures appropriately.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M4.T1.S1",
                   "title": "Create install.sh with platform detection",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M1.T1.S3",
@@ -238,7 +238,7 @@
                   "type": "Subtask",
                   "id": "P1.M4.T1.S2",
                   "title": "Add mdsel CLI verification",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P1.M4.T1.S1"
@@ -249,7 +249,7 @@
                   "type": "Subtask",
                   "id": "P1.M4.T1.S3",
                   "title": "Implement skill file installation",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M4.T1.S2"
@@ -260,7 +260,7 @@
                   "type": "Subtask",
                   "id": "P1.M4.T1.S4",
                   "title": "Implement Claude Code hook configuration",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 2,
                   "dependencies": [
                     "P1.M4.T1.S3"
@@ -271,7 +271,7 @@
                   "type": "Subtask",
                   "id": "P1.M4.T1.S5",
                   "title": "Implement OpenCode plugin installation",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M4.T1.S4"
@@ -282,7 +282,7 @@
                   "type": "Subtask",
                   "id": "P1.M4.T1.S6",
                   "title": "Add installation verification",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P1.M4.T1.S5"
