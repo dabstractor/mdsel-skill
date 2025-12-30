@@ -151,21 +151,21 @@
           "type": "Milestone",
           "id": "P1.M3",
           "title": "OpenCode Plugin Implementation",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Implement the TypeScript plugin for OpenCode that provides equivalent reminder functionality.",
           "tasks": [
             {
               "type": "Task",
               "id": "P1.M3.T1",
               "title": "Implement TypeScript Plugin",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create the OpenCode plugin that hooks tool.execute.after to issue reminders.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M3.T1.S1",
                   "title": "Create plugin directory and package.json",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per plan/architecture/opencode_plugins.md, plugins go in `hooks/opencode/`. Need `@opencode-ai/plugin` dependency. Per PRD Section 6.5, file is `hooks/opencode/mdsel-reminder.ts`.\n2. INPUT: None (parallel track).\n3. LOGIC: Create `hooks/opencode/` directory. Create `hooks/opencode/package.json` with dependencies: `@opencode-ai/plugin`, `@types/node`, `typescript`. Add tsconfig.json for TypeScript compilation.\n4. OUTPUT: Plugin directory with package.json. P1.M3.T1.S2 will implement the plugin."
@@ -174,7 +174,7 @@
                   "type": "Subtask",
                   "id": "P1.M3.T1.S2",
                   "title": "Implement plugin shell with hooks",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M3.T1.S1"
@@ -185,7 +185,7 @@
                   "type": "Subtask",
                   "id": "P1.M3.T1.S3",
                   "title": "Implement file detection and word count",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M3.T1.S2"
@@ -196,7 +196,7 @@
                   "type": "Subtask",
                   "id": "P1.M3.T1.S4",
                   "title": "Implement reminder output",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M3.T1.S3"
