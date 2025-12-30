@@ -38,34 +38,36 @@ The older MCP-based approach injected ~1300 tokens of tool schema into every con
 
 ## Installation
 
-### Method 1: npm (Recommended)
+### Claude Code (Marketplace)
 
 ```bash
-npm install -g mdsel-skill
+# Add the marketplace
+/plugin marketplace add dabstractor/mdsel-claude
+
+# Install the plugin
+/plugin install mdsel@mdsel-marketplace
+
+# Verify installation
+/plugin list
 ```
 
-The installation script runs automatically via `postinstall`, detecting your platform(s) and configuring the skill and hooks appropriately.
+### Using mdsel CLI
 
-### Method 2: Direct Script
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/dabstractor/mdsel-claude/main/install.sh | bash
-```
-
-### Method 3: npx (No Installation)
-
-You can use mdsel without installing anything:
+The skill uses the `mdsel` CLI tool. Install it separately if not already available:
 
 ```bash
+# Install globally
+npm install -g mdsel
+
+# Or use npx without installation
 npx mdsel h2.0 README.md
-npx mdsel h1.0 README.md
 ```
 
 ### Platform Support
 
 - **macOS** (darwin): Fully supported
 - **Linux**: Fully supported
-- **Windows**: Not officially supported (per package.json `os` field)
+- **Windows**: Not officially supported
 
 ## Quick Start
 
@@ -190,31 +192,7 @@ When a Markdown file is accessed:
 
 ### Hook Configuration
 
-Hooks are automatically configured during installation. If manual configuration is needed:
-
-#### Claude Code
-
-Edit `~/.claude/settings.json`:
-
-```json
-{
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": {"toolName": "Read"},
-        "hook": {
-          "type": "command",
-          "command": "bash ~/.claude/hooks/mdsel-reminder.sh"
-        }
-      }
-    ]
-  }
-}
-```
-
-#### OpenCode
-
-The TypeScript plugin is installed to `~/.config/opencode/plugins/mdsel-reminder/` during installation.
+Hooks are automatically configured when the plugin is installed via the marketplace. The plugin includes a PostToolUse hook that reminds agents to use mdsel for large Markdown files.
 
 **Note**: Hooks fire **every time** you use Read on a large Markdown file. This repetition is by design to condition proper usage patterns.
 
@@ -222,19 +200,11 @@ The TypeScript plugin is installed to `~/.config/opencode/plugins/mdsel-reminder
 
 ### Claude Code
 
-- **Skill Location**: `~/.claude/skills/mdsel/SKILL.md`
-- **Hook Type**: PostToolUse shell command
-- **Hook Script**: `~/.claude/hooks/mdsel-reminder.sh`
+Installed as a marketplace plugin. The plugin provides:
+- **Skill**: mdsel selector syntax and usage instructions
+- **Hook**: PostToolUse reminder for large Markdown files
 
-The skill is automatically recognized by Claude Code. Hooks are configured via settings.json.
-
-### OpenCode
-
-- **Skill Location**: `~/.claude/skills/mdsel/SKILL.md` (OpenCode recognizes `.claude/skills/`)
-- **Plugin Type**: TypeScript plugin
-- **Plugin Location**: `~/.config/opencode/plugins/mdsel-reminder/`
-
-A single installation works for both platforms thanks to OpenCode's explicit support for `.claude/skills/`.
+After installation via `/plugin install mdsel@mdsel-marketplace`, the plugin is automatically activated.
 
 ## Migration from mdsel-mcp
 
@@ -250,9 +220,10 @@ If you're migrating from the older MCP-based approach:
 
 ### Migration Steps
 
-1. **Remove the MCP server** from your Claude Code or OpenCode settings
-2. **Install mdsel-skill**: `npm install -g mdsel-skill`
-3. **Verify installation**: Check that `~/.claude/skills/mdsel/SKILL.md` exists
+1. **Remove the MCP server** from your Claude Code settings
+2. **Add marketplace**: `/plugin marketplace add dabstractor/mdsel-claude`
+3. **Install plugin**: `/plugin install mdsel@mdsel-marketplace`
+4. **Verify**: `/plugin list`
 
 The selector syntax and CLI commands remain identical. You gain significant token savings with no functional loss.
 
@@ -277,21 +248,17 @@ npx mdsel h2.0 README.md
 
 **Possible Causes**:
 
-1. **Hook not installed**: Check `~/.claude/hooks/mdsel-reminder.sh` exists
-2. **settings.json not configured**: Verify PostToolUse hook is in your settings
-3. **jq not available**: Install jq for JSON manipulation in the hook script
+1. **Plugin not installed**: Run `/plugin list` to verify the plugin is installed
+2. **jq not available**: Install jq for JSON manipulation in the hook script
 
 **Verification Steps**:
 
 ```bash
-# Check hook file exists
-ls -la ~/.claude/hooks/mdsel-reminder.sh
+# Check jq is available
+which jq
 
-# Check settings.json contains hook
-cat ~/.claude/settings.json | grep -A5 "PostToolUse"
-
-# Test hook directly
-echo '{"tool_name":"Read","tool_input":{"file_path":"README.md"}}' | bash ~/.claude/hooks/mdsel-reminder.sh
+# Verify plugin installation
+/plugin list
 ```
 
 ### "Invalid selector syntax"

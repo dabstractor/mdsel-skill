@@ -1,0 +1,17 @@
+{
+  "description": "Remind agents to use mdsel for large Markdown files",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/mdsel-reminder.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

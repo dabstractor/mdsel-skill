@@ -1,0 +1,20 @@
+{
+  "name": "mdsel",
+  "version": "1.0.0",
+  "description": "Access large Markdown files using declarative selectors via the mdsel CLI",
+  "author": {
+    "name": "Dustin Schultz",
+    "email": "dustindschultz@gmail.com"
+  },
+  "repository": "https://github.com/dabstractor/mdsel-claude",
+  "homepage": "https://github.com/dabstractor/mdsel-claude#readme",
+  "license": "MIT",
+  "keywords": [
+    "mdsel",
+    "markdown",
+    "selector",
+    "token-efficiency"
+  ],
+  "skills": "./skills",
+  "hooks": "./hooks"
+}

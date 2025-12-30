@@ -1,0 +1,15 @@
+{
+  "name": "mdsel-marketplace",
+  "owner": {
+    "name": "Dustin Schultz",
+    "email": "dustindschultz@gmail.com",
+    "url": "https://github.com/dabstractor"
+  },
+  "plugins": [
+    {
+      "name": "mdsel",
+      "source": ".",
+      "description": "Access large Markdown files using declarative selectors via the mdsel CLI"
+    }
+  ]
+}
