@@ -60,7 +60,7 @@
           "type": "Milestone",
           "id": "P1.M2",
           "title": "Claude Code Hook Implementation",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Implement the PostToolUse shell hook that fires reminders when Read is used on large Markdown files.",
           "tasks": [
             {
@@ -129,14 +129,14 @@
               "type": "Task",
               "id": "P1.M2.T2",
               "title": "Document Hook Configuration",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create documentation for settings.json hook configuration required for Claude Code integration.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M2.T2.S1",
                   "title": "Create settings.json example",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M2.T1.S5"
