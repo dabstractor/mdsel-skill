@@ -89,7 +89,7 @@ export const mdselReminder: Plugin = async ({ $ }) => {
           // Output normative reminder text
           // Wording is normative per PRD.md section 6.3 - no variation allowed
           console.log('This is a Markdown file over the configured size threshold.')
-          console.log('Use `mdsel index` and `mdsel select` instead of Read.')
+          console.log('Use `mdsel <selector> <file>` instead of Read.')
         }
       } catch (error) {
         // Silent error handling - never throw exceptions during normal operation

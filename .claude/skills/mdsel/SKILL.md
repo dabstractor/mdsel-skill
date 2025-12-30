@@ -2,8 +2,8 @@
 name: mdsel
 description: |
   Efficiently access large Markdown files using declarative selectors.
-  Use mdsel CLI to index files and select specific content without reading entire documents.
-  Triggered by: markdown, large files, selector, index, select.
+  Use mdsel CLI to select specific content without reading entire documents.
+  Triggered by: markdown, large files, selector, h2.0, h1.0.
 allowed-tools:
   - Bash
 ---
@@ -28,13 +28,10 @@ Use mdsel when:
 ### Basic Usage
 
 ```bash
-# Index a markdown file to understand its structure
-mdsel index README.md
-
 # Select specific content using declarative selectors
-mdsel select h2.0 README.md    # First H2 heading
-mdsel select h1.0 README.md    # First H1 heading
-mdsel select h3.1 README.md    # Second H3 heading
+mdsel h2.0 README.md    # First H2 heading
+mdsel h1.0 README.md    # First H1 heading
+mdsel h3.1 README.md    # Second H3 heading
 ```
 
 ## Selector Syntax
@@ -78,13 +75,13 @@ File content:
 
 ```bash
 # Get the first H2 (typically "## Installation" or similar)
-mdsel select h2.0 README.md
+mdsel h2.0 README.md
 
 # Get the third H2 section
-mdsel select h2.2 README.md
+mdsel h2.2 README.md
 
 # Get the second H3 under the second H2
-mdsel select h3.1 README.md
+mdsel h3.1 README.md
 ```
 
 ## When to Use This Skill
@@ -102,7 +99,7 @@ export MDSEL_MIN_WORDS=300
 
 1. File is Markdown (`.md` extension)?
 2. Word count > MDSEL_MIN_WORDS?
-3. **Yes**: Use `mdsel index` then `mdsel select`
+3. **Yes**: Use `mdsel <selector> <file>` for specific content
 4. **No**: Read tool is acceptable
 
 ### Token Efficiency
@@ -126,29 +123,20 @@ Using the Read tool on large Markdown files wastes tokens:
 ### Example 1: Basic Selection
 
 ```bash
-# Step 1: Index the file to see available sections
-mdsel index docs/API.md
+# Select the first H2 section
+mdsel h2.0 docs/API.md
 
-# Output might show:
-# h1.0: API Reference
-# h2.0: Authentication
-# h2.1: Endpoints
-# h2.2: Error Handling
-
-# Step 2: Select the first H2 section (e.g., "## Authentication")
-mdsel select h2.0 docs/API.md
+# Select the third H2 section
+mdsel h2.2 docs/API.md
 ```
 
 ### Example 2: Multiple Selections
 
 ```bash
-# Index once to understand structure
-mdsel index README.md
-
 # Select multiple sections sequentially
-mdsel select h2.0 README.md  # Installation section
-mdsel select h2.1 README.md  # Usage section
-mdsel select h2.2 README.md  # API Reference section
+mdsel h2.0 README.md  # Installation section
+mdsel h2.1 README.md  # Usage section
+mdsel h2.2 README.md  # API Reference section
 ```
 
 ### Example 3: Working with Nested Headings
@@ -162,16 +150,16 @@ mdsel select h2.2 README.md  # API Reference section
 # ## Configuration
 
 # Select specific nested sections
-mdsel select h3.0 README.md  # First H3 (Prerequisites)
-mdsel select h3.1 README.md  # Second H3 (Installation)
+mdsel h3.0 README.md  # First H3 (Prerequisites)
+mdsel h3.1 README.md  # Second H3 (Installation)
 ```
 
 ### Example 4: Using npx (if mdsel not installed)
 
 ```bash
 # Use npx to run mdsel without global installation
-npx mdsel index README.md
-npx mdsel select h1.0 README.md
+npx mdsel h1.0 README.md
+npx mdsel h2.0 README.md
 ```
 
 ### Example 5: Integrating with Workflows
@@ -181,8 +169,7 @@ npx mdsel select h1.0 README.md
 wc -w README.md
 
 # If > 200, use mdsel
-mdsel index README.md
-mdsel select h2.0 README.md
+mdsel h2.0 README.md
 
 # Otherwise, Read is acceptable
 # (but mdsel still works fine on small files too)
@@ -201,8 +188,8 @@ mdsel select h2.0 README.md
 npm install -g mdsel
 
 # Or use npx without installation
-npx mdsel index README.md
-npx mdsel select h1.0 README.md
+npx mdsel h1.0 README.md
+npx mdsel h2.0 README.md
 ```
 
 ### "Invalid selector syntax"
@@ -226,13 +213,13 @@ npx mdsel select h1.0 README.md
 
 ```bash
 # Use relative path from current directory
-mdsel index README.md
+mdsel h2.0 README.md
 
 # Use absolute path
-mdsel index /home/user/project/README.md
+mdsel h1.0 /home/user/project/README.md
 
 # Use explicit relative path
-mdsel index ./docs/guide.md
+mdsel h2.0 ./docs/guide.md
 
 # List files to verify
 ls -la *.md
@@ -242,23 +229,23 @@ ls -la *.md
 
 **Cause**: Selector index is too high for the available elements.
 
-**Solution**: Use `mdsel index` to see available selectors:
+**Solution**: Use `mdsel format` to see available selector formats:
 
 ```bash
-mdsel index README.md
-# This shows all valid selectors
-# Use a valid index from the output
+mdsel format
+# This shows the selector format specification
+# Use a valid index (e.g., h2.0, h2.1, h3.0)
 ```
 
 ### Reminder Hook Fires Repeatedly
 
 **Cause**: This is intentional behavior per the PRD specification.
 
-**Information**: The reminder "This is a Markdown file over the configured size threshold. Use `mdsel index` and `mdsel select` instead of Read." fires every time you use Read on a large Markdown file. This repetition is by design to condition proper usage patterns.
+**Information**: The reminder fires every time you use Read on a large Markdown file. This repetition is by design to condition proper usage patterns.
 
 **Solution**: Use mdsel as intended:
-1. Run `mdsel index <file>` to see structure
-2. Run `mdsel select <selector> <file>` for specific content
+1. Run `mdsel <selector> <file>` for specific content
+2. Use selectors like `h2.0`, `h1.0`, `h3.1` to target specific sections
 3. Reserve Read only for small files (< MDSEL_MIN_WORDS)
 
 ### Permission Denied on Script Files

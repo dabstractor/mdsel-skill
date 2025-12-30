@@ -57,8 +57,8 @@ curl -fsSL https://raw.githubusercontent.com/dabstractor/mdsel-claude/main/insta
 You can use mdsel without installing anything:
 
 ```bash
-npx mdsel index README.md
-npx mdsel select h2.0 README.md
+npx mdsel h2.0 README.md
+npx mdsel h1.0 README.md
 ```
 
 ### Platform Support
@@ -70,19 +70,13 @@ npx mdsel select h2.0 README.md
 ## Quick Start
 
 ```bash
-# 1. Index a markdown file to see its structure
-mdsel index README.md
-
-# Output shows available selectors:
-# h1.0: mdsel-skill
-# h2.0: What is mdsel-skill?
-# h2.1: Features
-# h2.2: Installation
+# 1. See available selector formats
+mdsel format
 
 # 2. Select specific sections using declarative selectors
-mdsel select h2.0 README.md    # First H2 heading
-mdsel select h2.1 README.md    # Second H2 heading
-mdsel select h3.0 README.md    # First H3 heading
+mdsel h2.0 README.md    # First H2 heading
+mdsel h2.1 README.md    # Second H2 heading
+mdsel h3.0 README.md    # First H3 heading
 ```
 
 ## Usage
@@ -98,7 +92,7 @@ Use mdsel when:
 
 1. File is Markdown (`.md` extension)?
 2. Word count > MDSEL_MIN_WORDS?
-3. **Yes**: Use `mdsel index` then `mdsel select`
+3. **Yes**: Use `mdsel <selector> <file>` for specific content
 4. **No**: Read tool is acceptable
 
 ### Selector Syntax
@@ -138,29 +132,20 @@ To access "## Introduction", use `h2.0`, not `h2.1`.
 #### Example 1: Basic Selection
 
 ```bash
-# Step 1: Index the file to see available sections
-mdsel index docs/API.md
+# Select the first H2 section
+mdsel h2.0 docs/API.md
 
-# Output might show:
-# h1.0: API Reference
-# h2.0: Authentication
-# h2.1: Endpoints
-# h2.2: Error Handling
-
-# Step 2: Select the first H2 section (e.g., "## Authentication")
-mdsel select h2.0 docs/API.md
+# Select the third H2 section
+mdsel h2.2 docs/API.md
 ```
 
 #### Example 2: Multiple Selections
 
 ```bash
-# Index once to understand structure
-mdsel index README.md
-
 # Select multiple sections sequentially
-mdsel select h2.0 README.md  # Installation section
-mdsel select h2.1 README.md  # Usage section
-mdsel select h2.2 README.md  # API Reference section
+mdsel h2.0 README.md  # Installation section
+mdsel h2.1 README.md  # Usage section
+mdsel h2.2 README.md  # API Reference section
 ```
 
 #### Example 3: Nested Headings
@@ -174,16 +159,16 @@ mdsel select h2.2 README.md  # API Reference section
 # ## Configuration
 
 # Select specific nested sections
-mdsel select h3.0 README.md  # First H3 (Prerequisites)
-mdsel select h3.1 README.md  # Second H3 (Installation)
+mdsel h3.0 README.md  # First H3 (Prerequisites)
+mdsel h3.1 README.md  # Second H3 (Installation)
 ```
 
 #### Example 4: Using npx
 
 ```bash
 # Use npx to run mdsel without global installation
-npx mdsel index README.md
-npx mdsel select h1.0 README.md
+npx mdsel h1.0 README.md
+npx mdsel h2.0 README.md
 ```
 
 ## Configuration
@@ -284,8 +269,8 @@ The selector syntax and CLI commands remain identical. You gain significant toke
 npm install -g mdsel
 
 # Or use npx without installation
-npx mdsel index README.md
-npx mdsel select h1.0 README.md
+npx mdsel h1.0 README.md
+npx mdsel h2.0 README.md
 ```
 
 ### "Hook not triggering"
@@ -326,12 +311,12 @@ echo '{"tool_name":"Read","tool_input":{"file_path":"README.md"}}' | bash ~/.cla
 
 **Cause**: Selector index is too high for the available elements.
 
-**Solution**: Use `mdsel index` to see available selectors:
+**Solution**: Use `mdsel format` to see available selector formats, then adjust your selector index:
 
 ```bash
-mdsel index README.md
-# This shows all valid selectors
-# Use a valid index from the output
+mdsel format
+# This shows the selector format specification
+# Use a valid index (e.g., h2.0, h2.1, h3.0)
 ```
 
 ### Reminder Hook Fires Repeatedly
@@ -341,8 +326,8 @@ mdsel index README.md
 The reminder fires every time you use Read on a large Markdown file to encourage proper usage patterns.
 
 **Solution**: Use mdsel as intended:
-1. Run `mdsel index <file>` to see structure
-2. Run `mdsel select <selector> <file>` for specific content
+1. Run `mdsel <selector> <file>` for specific content
+2. Use selectors like `h2.0`, `h1.0`, `h3.1` to target specific sections
 3. Reserve Read only for small files (< MDSEL_MIN_WORDS)
 
 ## License

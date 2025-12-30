@@ -49,8 +49,8 @@ The MCP approach injects full tool schemas into every conversation. The skill ap
 
 When working with Markdown files over the size threshold, agents must:
 
-1. First index the file with `mdsel index`
-2. Then select specific content with `mdsel select`
+1. Select content directly with `mdsel <selector> <file>`
+2. Use selectors like `h2.0`, `h1.0`, `h3.1` to target specific sections
 3. Never read the entire file with `Read`
 
 ### 2.3 Cross-Platform Compatibility
@@ -77,8 +77,8 @@ npm install -g mdsel
 Or available via npx:
 
 ```bash
-npx mdsel index README.md
-npx mdsel select h2.0 README.md
+npx mdsel h2.0 README.md
+npx mdsel h1.0 README.md
 ```
 
 ### 3.2 No MCP Server Required
@@ -190,7 +190,7 @@ Canonical wording:
 
 ```
 This is a Markdown file over the configured size threshold.
-Use `mdsel index` and `mdsel select` instead of Read.
+Use `mdsel <selector> <file>` instead of Read.
 ```
 
 No variation is allowed.

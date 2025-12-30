@@ -4,7 +4,7 @@
       "type": "Phase",
       "id": "P1",
       "title": "MVP: Cross-Platform Skill with Reminder Hooks",
-      "status": "Planned",
+      "status": "Complete",
       "description": "Deliver a fully functional mdsel-skill that works across Claude Code and OpenCode with behavioral enforcement via reminder hooks. Token overhead when inactive must be <100 tokens.",
       "milestones": [
         {
@@ -211,7 +211,7 @@
           "type": "Milestone",
           "id": "P1.M4",
           "title": "Installation and Distribution",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Create installation script and npm package for easy distribution and setup.",
           "tasks": [
             {
@@ -295,14 +295,14 @@
               "type": "Task",
               "id": "P1.M4.T2",
               "title": "Create npm Package Configuration",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Set up package.json for npm distribution.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M4.T2.S1",
                   "title": "Create root package.json",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M4.T1.S6"
@@ -313,7 +313,7 @@
                   "type": "Subtask",
                   "id": "P1.M4.T2.S2",
                   "title": "Add npm scripts and metadata",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P1.M4.T2.S1"
