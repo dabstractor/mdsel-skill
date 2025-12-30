@@ -67,14 +67,14 @@
               "type": "Task",
               "id": "P1.M2.T1",
               "title": "Implement Shell Hook Script",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Create the bash script that checks for Markdown files over the word threshold and outputs reminders.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M2.T1.S1",
                   "title": "Create hook directory structure",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per PRD Section 7.2, Claude Code hook goes at `hooks/claude/mdsel-reminder.sh`.\n2. INPUT: None (parallel track, independent of P1.M1).\n3. LOGIC: Create directory `hooks/claude/`.\n4. OUTPUT: Directory `hooks/claude/` exists. P1.M2.T1.S2 will create the shell script within."
@@ -83,7 +83,7 @@
                   "type": "Subtask",
                   "id": "P1.M2.T1.S2",
                   "title": "Implement stdin JSON parsing",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M2.T1.S1"
@@ -94,7 +94,7 @@
                   "type": "Subtask",
                   "id": "P1.M2.T1.S3",
                   "title": "Implement Markdown file detection",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P1.M2.T1.S2"
@@ -105,7 +105,7 @@
                   "type": "Subtask",
                   "id": "P1.M2.T1.S4",
                   "title": "Implement word count logic",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M2.T1.S3"
@@ -116,7 +116,7 @@
                   "type": "Subtask",
                   "id": "P1.M2.T1.S5",
                   "title": "Implement reminder output",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M2.T1.S4"
