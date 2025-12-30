@@ -11,21 +11,21 @@
           "type": "Milestone",
           "id": "P1.M1",
           "title": "Skill Definition",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Create the cross-platform SKILL.md file that instructs agents on mdsel usage patterns.",
           "tasks": [
             {
               "type": "Task",
               "id": "P1.M1.T1",
               "title": "Create SKILL.md with YAML Frontmatter",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Implement the skill definition file with proper metadata and instructions for using mdsel CLI.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M1.T1.S1",
                   "title": "Create skill directory structure",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per plan/architecture/system_context.md, skill location is `.claude/skills/mdsel/`. OpenCode supports this path natively.\n2. INPUT: None (first subtask).\n3. LOGIC: Create directory at `.claude/skills/mdsel/`. Ensure parent directories exist.\n4. OUTPUT: Directory structure `.claude/skills/mdsel/` exists. Next subtask P1.M1.T1.S2 will create SKILL.md within this directory."
@@ -34,18 +34,22 @@
                   "type": "Subtask",
                   "id": "P1.M1.T1.S2",
                   "title": "Implement YAML frontmatter",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
-                  "dependencies": ["P1.M1.T1.S1"],
+                  "dependencies": [
+                    "P1.M1.T1.S1"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per plan/architecture/claude_code_skills.md, frontmatter requires `name` (lowercase, max 64 chars), `description` (max 1024 chars with trigger keywords), optionally `allowed-tools`.\n2. INPUT: Directory `.claude/skills/mdsel/` from P1.M1.T1.S1.\n3. LOGIC: Create `.claude/skills/mdsel/SKILL.md` with YAML frontmatter. Name: `mdsel`. Description must include trigger words: 'markdown', 'large files', 'selector', 'index', 'select'. Set `allowed-tools: Bash` since mdsel is CLI-based. Keep under 100 tokens for inactive overhead.\n4. OUTPUT: File `.claude/skills/mdsel/SKILL.md` with valid YAML frontmatter block (---...---). P1.M1.T1.S3 will add the instruction body."
                 },
                 {
                   "type": "Subtask",
                   "id": "P1.M1.T1.S3",
                   "title": "Write skill instruction body",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 2,
-                  "dependencies": ["P1.M1.T1.S2"],
+                  "dependencies": [
+                    "P1.M1.T1.S2"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per plan/architecture/claude_code_skills.md, skill body should be <500 lines. Per plan/architecture/external_deps.md, mdsel CLI has `index` and `select` commands with selector syntax `<element>.<index>`.\n2. INPUT: SKILL.md file from P1.M1.T1.S2 with frontmatter only.\n3. LOGIC: Append instruction sections: (a) Quick Start showing `mdsel index` and `mdsel select` usage, (b) Selector Syntax Reference documenting `h1.0`, `h2.1` patterns, (c) When to Use explaining MDSEL_MIN_WORDS threshold (default 200), (d) Examples showing real workflows. Emphasize: NEVER use Read tool on large markdown files.\n4. OUTPUT: Complete SKILL.md file ready for both Claude Code and OpenCode. File consumed by both platform runtimes at skill discovery time."
                 }
               ]
@@ -81,7 +85,9 @@
                   "title": "Implement stdin JSON parsing",
                   "status": "Planned",
                   "story_points": 1,
-                  "dependencies": ["P1.M2.T1.S1"],
+                  "dependencies": [
+                    "P1.M2.T1.S1"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per plan/architecture/claude_code_skills.md, PostToolUse receives JSON via stdin with structure: `{tool_name, tool_input: {file_path}, tool_response}`. Use `jq` for parsing.\n2. INPUT: Directory `hooks/claude/` from P1.M2.T1.S1.\n3. LOGIC: Create `hooks/claude/mdsel-reminder.sh` with shebang `#!/bin/bash`. Read stdin to variable. Extract `tool_input.file_path` using jq. Handle jq not installed gracefully (exit 0). Add executable permission.\n4. OUTPUT: Shell script that parses stdin JSON and extracts file_path into variable. P1.M2.T1.S3 will add file extension check."
                 },
                 {
@@ -90,7 +96,9 @@
                   "title": "Implement Markdown file detection",
                   "status": "Planned",
                   "story_points": 0.5,
-                  "dependencies": ["P1.M2.T1.S2"],
+                  "dependencies": [
+                    "P1.M2.T1.S2"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per PRD Section 6.1, trigger only for `.md` extension files.\n2. INPUT: Shell script from P1.M2.T1.S2 with file_path extracted.\n3. LOGIC: Add conditional check: if file_path does not end in `.md`, exit 0 immediately (no reminder needed). Use bash pattern matching `[[ \"$FILE_PATH\" != *.md ]]`.\n4. OUTPUT: Script with early-exit for non-Markdown files. P1.M2.T1.S4 will add word counting."
                 },
                 {
@@ -99,7 +107,9 @@
                   "title": "Implement word count logic",
                   "status": "Planned",
                   "story_points": 1,
-                  "dependencies": ["P1.M2.T1.S3"],
+                  "dependencies": [
+                    "P1.M2.T1.S3"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per PRD Section 5.2, word count is whitespace-delimited tokens. Use `wc -w`. Threshold from `MDSEL_MIN_WORDS` env var, default 200.\n2. INPUT: Script from P1.M2.T1.S3 that exits early for non-.md files.\n3. LOGIC: Read MDSEL_MIN_WORDS with default 200: `THRESHOLD=${MDSEL_MIN_WORDS:-200}`. Count words: `WORD_COUNT=$(wc -w < \"$FILE_PATH\" 2>/dev/null || echo 0)`. Compare: `if [ \"$WORD_COUNT\" -gt \"$THRESHOLD\" ]`.\n4. OUTPUT: Script with threshold comparison. P1.M2.T1.S5 will add reminder output."
                 },
                 {
@@ -108,7 +118,9 @@
                   "title": "Implement reminder output",
                   "status": "Planned",
                   "story_points": 1,
-                  "dependencies": ["P1.M2.T1.S4"],
+                  "dependencies": [
+                    "P1.M2.T1.S4"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per PRD Section 6.3, reminder text is NORMATIVE: 'This is a Markdown file over the configured size threshold.\\nUse `mdsel index` and `mdsel select` instead of Read.' Per plan/architecture/implementation_notes.md, use JSON output with hookSpecificOutput.additionalContext for PostToolUse.\n2. INPUT: Script from P1.M2.T1.S4 with threshold check.\n3. LOGIC: Inside the threshold-exceeded block, output JSON: `echo '{\"hookSpecificOutput\":{\"additionalContext\":\"This is a Markdown file over the configured size threshold. Use \\`mdsel index\\` and \\`mdsel select\\` instead of Read.\"}}'`. Always exit 0 (non-blocking per PRD Section 6.4).\n4. OUTPUT: Complete shell hook script. Ready for integration with settings.json configuration (P1.M2.T2)."
                 }
               ]
@@ -126,7 +138,9 @@
                   "title": "Create settings.json example",
                   "status": "Planned",
                   "story_points": 1,
-                  "dependencies": ["P1.M2.T1.S5"],
+                  "dependencies": [
+                    "P1.M2.T1.S5"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per plan/architecture/claude_code_skills.md, hooks config uses `{\"hooks\": {\"PostToolUse\": [{\"matcher\": \"Read\", \"hooks\": [{\"type\": \"command\", \"command\": \"path/to/script\"}]}]}}`. Config locations: `~/.claude/settings.json` (user) or `.claude/settings.json` (project).\n2. INPUT: Complete hook script from P1.M2.T1.S5.\n3. LOGIC: Create example JSON snippet in README or separate config example file showing exact settings.json structure needed. Include both user-level and project-level paths. Reference `hooks/claude/mdsel-reminder.sh` with note about absolute paths.\n4. OUTPUT: settings.json configuration example. Consumed by install.sh (P1.M4.T1) for automated configuration."
                 }
               ]
@@ -162,7 +176,9 @@
                   "title": "Implement plugin shell with hooks",
                   "status": "Planned",
                   "story_points": 1,
-                  "dependencies": ["P1.M3.T1.S1"],
+                  "dependencies": [
+                    "P1.M3.T1.S1"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per plan/architecture/opencode_plugins.md, plugin exports `Plugin` type function. Hook is `tool.execute.after`. Per plan/architecture/implementation_notes.md, need `tool.execute.before` to capture args since `tool.execute.after` may not have direct arg access.\n2. INPUT: Package setup from P1.M3.T1.S1.\n3. LOGIC: Create `hooks/opencode/mdsel-reminder.ts`. Import Plugin type. Export MdselReminder plugin. Implement `tool.execute.before` to capture file_path when tool is 'Read'. Implement `tool.execute.after` stub.\n4. OUTPUT: Plugin skeleton with both hooks. P1.M3.T1.S3 will add logic."
                 },
                 {
@@ -171,7 +187,9 @@
                   "title": "Implement file detection and word count",
                   "status": "Planned",
                   "story_points": 1,
-                  "dependencies": ["P1.M3.T1.S2"],
+                  "dependencies": [
+                    "P1.M3.T1.S2"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per PRD Section 5.2, word count is whitespace-delimited. Use `content.split(/\\s+/).filter(Boolean).length`. Threshold from `MDSEL_MIN_WORDS` env, default 200.\n2. INPUT: Plugin skeleton from P1.M3.T1.S2 with captured file_path.\n3. LOGIC: In `tool.execute.after`, check if tool is 'Read' and captured path ends in '.md'. Import fs.readFileSync. Read file content. Implement countWords function. Compare against threshold from `process.env.MDSEL_MIN_WORDS || '200'`.\n4. OUTPUT: Plugin with word count logic. P1.M3.T1.S4 will add reminder output."
                 },
                 {
@@ -180,7 +198,9 @@
                   "title": "Implement reminder output",
                   "status": "Planned",
                   "story_points": 1,
-                  "dependencies": ["P1.M3.T1.S3"],
+                  "dependencies": [
+                    "P1.M3.T1.S3"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per PRD Section 6.3, reminder text is NORMATIVE (exact wording required). Per plan/architecture/opencode_plugins.md, console.log outputs are visible but exact injection mechanism needs verification.\n2. INPUT: Plugin from P1.M3.T1.S3 with threshold check.\n3. LOGIC: When threshold exceeded, output reminder via console.log or plugin return mechanism: 'This is a Markdown file over the configured size threshold.\\nUse `mdsel index` and `mdsel select` instead of Read.'\n4. OUTPUT: Complete OpenCode plugin. Ready for installation (P1.M4.T1)."
                 }
               ]
@@ -207,7 +227,11 @@
                   "title": "Create install.sh with platform detection",
                   "status": "Planned",
                   "story_points": 1,
-                  "dependencies": ["P1.M1.T1.S3", "P1.M2.T1.S5", "P1.M3.T1.S4"],
+                  "dependencies": [
+                    "P1.M1.T1.S3",
+                    "P1.M2.T1.S5",
+                    "P1.M3.T1.S4"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per PRD Section 7.3, installer must detect Claude Code and OpenCode presence. Claude Code: check for ~/.claude/ or .claude/. OpenCode: check for ~/.config/opencode/ or .opencode/.\n2. INPUT: Complete SKILL.md from P1.M1.T1.S3, hook script from P1.M2.T1.S5, plugin from P1.M3.T1.S4.\n3. LOGIC: Create `install.sh` with shebang. Implement detect_claude_code() function (check directories). Implement detect_opencode() function. Print detected platforms.\n4. OUTPUT: install.sh with platform detection. P1.M4.T1.S2 will add mdsel verification."
                 },
                 {
@@ -216,7 +240,9 @@
                   "title": "Add mdsel CLI verification",
                   "status": "Planned",
                   "story_points": 0.5,
-                  "dependencies": ["P1.M4.T1.S1"],
+                  "dependencies": [
+                    "P1.M4.T1.S1"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per plan/architecture/external_deps.md, mdsel may not be publicly available. Per PRD Section 3.1, check `which mdsel` or `npx mdsel --version`.\n2. INPUT: install.sh from P1.M4.T1.S1.\n3. LOGIC: Add verify_mdsel() function. Try `command -v mdsel` first. If not found, try `npx mdsel --version 2>/dev/null`. If neither works, print WARNING (not error) about mdsel requirement but continue installation.\n4. OUTPUT: install.sh with mdsel check. P1.M4.T1.S3 will add skill installation."
                 },
                 {
@@ -225,7 +251,9 @@
                   "title": "Implement skill file installation",
                   "status": "Planned",
                   "story_points": 1,
-                  "dependencies": ["P1.M4.T1.S2"],
+                  "dependencies": [
+                    "P1.M4.T1.S2"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per plan/architecture/system_context.md, skill goes to `.claude/skills/mdsel/SKILL.md` for both platforms.\n2. INPUT: install.sh from P1.M4.T1.S2.\n3. LOGIC: Add install_skill() function. Create target directory `.claude/skills/mdsel/`. Copy SKILL.md from source to target. Set appropriate permissions. Print success message.\n4. OUTPUT: install.sh with skill installation. P1.M4.T1.S4 will add Claude Code hook config."
                 },
                 {
@@ -234,7 +262,9 @@
                   "title": "Implement Claude Code hook configuration",
                   "status": "Planned",
                   "story_points": 2,
-                  "dependencies": ["P1.M4.T1.S3"],
+                  "dependencies": [
+                    "P1.M4.T1.S3"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per plan/architecture/claude_code_skills.md, hooks configured in settings.json. Must handle existing settings.json (merge) vs new file (create). Config at project level `.claude/settings.json`.\n2. INPUT: install.sh from P1.M4.T1.S3.\n3. LOGIC: Add configure_claude_hooks() function. Check if `.claude/settings.json` exists. If exists, use jq to merge hooks config (preserve existing settings). If not, create new with hooks config. Copy hook script to `hooks/claude/`. Add execution permission. Print instructions for user-level installation if desired.\n4. OUTPUT: install.sh with Claude Code configuration. P1.M4.T1.S5 will add OpenCode config."
                 },
                 {
@@ -243,7 +273,9 @@
                   "title": "Implement OpenCode plugin installation",
                   "status": "Planned",
                   "story_points": 1,
-                  "dependencies": ["P1.M4.T1.S4"],
+                  "dependencies": [
+                    "P1.M4.T1.S4"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per plan/architecture/opencode_plugins.md, plugins go to `.opencode/plugin/`. May need to update opencode.json to register plugin.\n2. INPUT: install.sh from P1.M4.T1.S4.\n3. LOGIC: Add configure_opencode() function (only if OpenCode detected). Create `.opencode/plugin/` directory. Copy mdsel-reminder.ts plugin. Create or update opencode.json if needed. Run npm/bun install in plugin directory for dependencies.\n4. OUTPUT: Complete install.sh. P1.M4.T1.S6 will add verification."
                 },
                 {
@@ -252,7 +284,9 @@
                   "title": "Add installation verification",
                   "status": "Planned",
                   "story_points": 0.5,
-                  "dependencies": ["P1.M4.T1.S5"],
+                  "dependencies": [
+                    "P1.M4.T1.S5"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per PRD Section 7.3, installer must verify installation.\n2. INPUT: install.sh from P1.M4.T1.S5.\n3. LOGIC: Add verify_installation() function. Check skill file exists at target. Check hook script exists and is executable. Check plugin exists for OpenCode. Print summary of what was installed. Return appropriate exit code.\n4. OUTPUT: Complete, production-ready install.sh."
                 }
               ]
@@ -270,7 +304,9 @@
                   "title": "Create root package.json",
                   "status": "Planned",
                   "story_points": 1,
-                  "dependencies": ["P1.M4.T1.S6"],
+                  "dependencies": [
+                    "P1.M4.T1.S6"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Package should be named `mdsel-skill` per PRD title. Include bin entry for install script. Include files array for distribution.\n2. INPUT: Complete install.sh from P1.M4.T1.S6.\n3. LOGIC: Create package.json with: name 'mdsel-skill', version '1.0.0', description from PRD purpose, bin entry pointing to install.sh, files array including .claude/, hooks/, install.sh. Add keywords for discoverability.\n4. OUTPUT: package.json for npm publishing. P1.M4.T2.S2 will add scripts."
                 },
                 {
@@ -279,7 +315,9 @@
                   "title": "Add npm scripts and metadata",
                   "status": "Planned",
                   "story_points": 0.5,
-                  "dependencies": ["P1.M4.T2.S1"],
+                  "dependencies": [
+                    "P1.M4.T2.S1"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Standard npm scripts: postinstall for auto-setup, test for validation.\n2. INPUT: package.json from P1.M4.T2.S1.\n3. LOGIC: Add scripts: postinstall calls install.sh (or skip), test validates file existence. Add repository, author, license (MIT). Add engines specifying node version.\n4. OUTPUT: Complete package.json ready for `npm publish`."
                 }
               ]
@@ -306,7 +344,9 @@
                   "title": "Write installation section",
                   "status": "Planned",
                   "story_points": 1,
-                  "dependencies": ["P1.M4.T2.S2"],
+                  "dependencies": [
+                    "P1.M4.T2.S2"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per PRD, installation via npm or manual. Must document mdsel CLI prerequisite.\n2. INPUT: Complete package.json from P1.M4.T2.S2.\n3. LOGIC: Create README.md. Add title, badges. Write Installation section with npm install command, manual installation steps, mdsel CLI requirement and installation.\n4. OUTPUT: README.md with installation section. P1.M5.T1.S2 will add usage."
                 },
                 {
@@ -315,7 +355,9 @@
                   "title": "Write usage and configuration section",
                   "status": "Planned",
                   "story_points": 1,
-                  "dependencies": ["P1.M5.T1.S1"],
+                  "dependencies": [
+                    "P1.M5.T1.S1"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per PRD Sections 4-6, document MDSEL_MIN_WORDS env var, expected behavior, how reminders work.\n2. INPUT: README.md from P1.M5.T1.S1.\n3. LOGIC: Add Configuration section documenting MDSEL_MIN_WORDS (default 200). Add Usage section explaining how skill activates, when reminders fire. Add Troubleshooting for common issues.\n4. OUTPUT: README.md with usage section. P1.M5.T1.S3 will add migration guide."
                 },
                 {
@@ -324,7 +366,9 @@
                   "title": "Write migration guide from mdsel-mcp",
                   "status": "Planned",
                   "story_points": 0.5,
-                  "dependencies": ["P1.M5.T1.S2"],
+                  "dependencies": [
+                    "P1.M5.T1.S2"
+                  ],
                   "context_scope": "CONTRACT DEFINITION:\n1. RESEARCH NOTE: Per PRD Section 9, users of mdsel-mcp should remove MCP server, install skill, configure hooks.\n2. INPUT: README.md from P1.M5.T1.S2.\n3. LOGIC: Add Migration section with steps: (1) Remove MCP server from mcp.json or claude_desktop_config.json, (2) Install mdsel-skill, (3) Verify hooks configured. Explain token reduction benefit (~1300 to <100).\n4. OUTPUT: Complete README.md ready for publication."
                 }
               ]
