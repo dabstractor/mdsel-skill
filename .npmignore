@@ -1,0 +1,26 @@
+# Development dependencies
+node_modules/
+package-lock.json
+
+# Build artifacts
+dist/
+build/
+*.log
+
+# Project documentation (internal)
+plan/
+PRD.md
+tasks.json
+
+# Other development files
+.git/
+.gitignore
+.npmignore
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

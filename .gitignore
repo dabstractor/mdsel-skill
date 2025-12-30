@@ -28,6 +28,9 @@ Thumbs.db
 .idea/
 *.sublime-*
 
+# Claude Code local config
+.claude/
+
 # Temporary files
 *.tmp
 *.temp

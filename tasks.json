@@ -328,21 +328,21 @@
           "type": "Milestone",
           "id": "P1.M5",
           "title": "Documentation",
-          "status": "Planned",
+          "status": "Complete",
           "description": "Create user-facing documentation for installation and usage.",
           "tasks": [
             {
               "type": "Task",
               "id": "P1.M5.T1",
               "title": "Create README.md",
-              "status": "Planned",
+              "status": "Complete",
               "description": "Write comprehensive README with installation and usage instructions.",
               "subtasks": [
                 {
                   "type": "Subtask",
                   "id": "P1.M5.T1.S1",
                   "title": "Write installation section",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M4.T2.S2"
@@ -353,7 +353,7 @@
                   "type": "Subtask",
                   "id": "P1.M5.T1.S2",
                   "title": "Write usage and configuration section",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 1,
                   "dependencies": [
                     "P1.M5.T1.S1"
@@ -364,7 +364,7 @@
                   "type": "Subtask",
                   "id": "P1.M5.T1.S3",
                   "title": "Write migration guide from mdsel-mcp",
-                  "status": "Planned",
+                  "status": "Complete",
                   "story_points": 0.5,
                   "dependencies": [
                     "P1.M5.T1.S2"

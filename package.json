@@ -1,7 +1,23 @@
 {
   "name": "mdsel-skill",
   "version": "1.0.0",
-  "description": "Efficiently access large Markdown files using declarative selectors via the mdsel CLI",
+  "description": "Access large Markdown files using declarative selectors via the mdsel CLI",
+  "author": "Dustin Schultz <dustindschultz@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "mdsel",
+    "markdown",
+    "selector",
+    "cli",
+    "claude",
+    "claude-code",
+    "opencode",
+    "skill",
+    "ai",
+    "automation",
+    "token-efficiency",
+    "productivity"
+  ],
   "bin": {
     "install-mdsel-skill": "./install.sh"
   },
@@ -10,9 +26,25 @@
   },
   "files": [
     "install.sh",
-    ".claude/",
-    "hooks/",
-    "README.md"
+    ".claude/skills/",
+    "hooks/claude/mdsel-reminder.sh",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dabstractor/mdsel-claude.git"
+  },
+  "homepage": "https://github.com/dabstractor/mdsel-claude#readme",
+  "bugs": {
+    "url": "https://github.com/dabstractor/mdsel-claude/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "os": [
+    "darwin",
+    "linux"
   ],
   "dependencies": {
     "mdsel": "^0.1.1"

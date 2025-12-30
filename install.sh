@@ -237,8 +237,8 @@ install_opencode_plugin() {
 
         echo "  Plugin installed to: $plugin_target_dir"
     else
-        echo "  ERROR: Plugin source directory not found: $plugin_source_dir"
-        return 1
+        echo "  OpenCode plugin source not included in package, skipping"
+        return 0
     fi
 }
 
