@@ -3,13 +3,13 @@
 [![npm version](https://badge.fury.io/js/mdsel-skill.svg)](https://www.npmjs.com/package/mdsel-skill)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)](https://nodejs.org/)
-[![Platform](https://img.shields.io/badge/platform-darwin%20%7C%20linux-lightgrey.svg)](https://github.com/dabstractor/mdsel-claude)
+[![Platform](https://img.shields.io/badge/platform-darwin%20%7C%20linux-lightgrey.svg)](https://github.com/dabstractor/mdsel-skill)
 
 > Access large Markdown files using declarative selectors via the mdsel CLI
 
 ## What is mdsel-skill?
 
-**mdsel-skill** is a cross-platform agent skill for AI coding assistants (Claude Code, OpenCode) that conditions efficient access to large Markdown files using declarative selectors instead of full-file reads.
+**mdsel-skill** is a Claude Code plugin that enables efficient access to large Markdown files using declarative selectors instead of full-file reads.
 
 Instead of reading entire documentation files and wasting thousands of tokens, agents can select specific sections using simple selectors like `h2.0` (first H2 heading) or `h3.1` (second H3 heading).
 
@@ -30,7 +30,7 @@ The older MCP-based approach injected ~600 tokens of tool schema into every conv
 ## Features
 
 - **Token Efficient**: Reduces token usage by 95-99.5% for large Markdown files
-- **Cross-Platform**: Single installation works for both Claude Code and OpenCode
+- **Easy Installation**: Install via Claude Code marketplace
 - **Declarative Selectors**: Simple `h2.0`, `h3.1` syntax for accessing sections
 - **Automatic Hooks**: Optional reminder hooks encourage proper usage patterns
 - **Zero-Based Indexing**: Predictable selector behavior with 0-based indexing
@@ -42,7 +42,7 @@ The older MCP-based approach injected ~600 tokens of tool schema into every conv
 
 ```bash
 # Add the marketplace
-/plugin marketplace add dabstractor/mdsel-claude
+/plugin marketplace add dabstractor/mdsel-skill
 
 # Install the plugin
 /plugin install mdsel@mdsel-marketplace
@@ -72,8 +72,8 @@ npx mdsel h2.0 README.md
 ## Quick Start
 
 ```bash
-# 1. See available selector formats
-mdsel format
+# 1. Get the document index (shows all available selectors)
+mdsel README.md
 
 # 2. Select specific sections using declarative selectors
 mdsel h2.0 README.md    # First H2 heading
@@ -221,7 +221,7 @@ If you're migrating from the older MCP-based approach:
 ### Migration Steps
 
 1. **Remove the MCP server** from your Claude Code settings
-2. **Add marketplace**: `/plugin marketplace add dabstractor/mdsel-claude`
+2. **Add marketplace**: `/plugin marketplace add dabstractor/mdsel-skill`
 3. **Install plugin**: `/plugin install mdsel@mdsel-marketplace`
 4. **Verify**: `/plugin list`
 
@@ -278,11 +278,11 @@ which jq
 
 **Cause**: Selector index is too high for the available elements.
 
-**Solution**: Use `mdsel format` to see available selector formats, then adjust your selector index:
+**Solution**: Run `mdsel <file>` without a selector to see the document index, then adjust your selector:
 
 ```bash
-mdsel format
-# This shows the selector format specification
+mdsel README.md
+# This shows all available selectors in the document
 # Use a valid index (e.g., h2.0, h2.1, h3.0)
 ```
 
@@ -303,6 +303,6 @@ MIT © Dustin Schultz
 
 ## Links
 
-- **Repository**: https://github.com/dabstractor/mdsel-claude
-- **Issues**: https://github.com/dabstractor/mdsel-claude/issues
+- **Repository**: https://github.com/dabstractor/mdsel-skill
+- **Issues**: https://github.com/dabstractor/mdsel-skill/issues
 - **npm Package**: https://www.npmjs.com/package/mdsel-skill

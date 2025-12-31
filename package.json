@@ -1,5 +1,5 @@
 {
-  "name": "mdsel-claude",
+  "name": "mdsel-skill",
   "version": "1.0.0",
   "description": "Claude Code marketplace plugin for accessing large Markdown files using declarative selectors",
   "author": "Dustin Schultz <dustindschultz@gmail.com>",
@@ -16,10 +16,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dabstractor/mdsel-claude.git"
+    "url": "git+https://github.com/dabstractor/mdsel-skill.git"
   },
-  "homepage": "https://github.com/dabstractor/mdsel-claude#readme",
+  "homepage": "https://github.com/dabstractor/mdsel-skill#readme",
   "bugs": {
-    "url": "https://github.com/dabstractor/mdsel-claude/issues"
+    "url": "https://github.com/dabstractor/mdsel-skill/issues"
   }
 }
