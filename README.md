@@ -25,7 +25,7 @@ Using the Read tool on large Markdown files wastes tokens:
 
 ### Why mdsel-skill instead of mdsel-mcp?
 
-The older MCP-based approach injected ~1300 tokens of tool schema into every conversation. Skills load on-demand, consuming only ~50-100 tokens when inactive—a **96% reduction** in overhead.
+The older MCP-based approach injected ~600 tokens of tool schema into every conversation. Skills load on-demand, consuming only ~50-100 tokens when inactive—a **96% reduction** in overhead.
 
 ## Features
 
