@@ -1,18 +1,16 @@
 ---
 name: mdsel
-description: "Important: NEVER use Read on .md files. Use: mdsel h2.0 file.md. Triggers: markdown, .md, README, documentation, docs"
+description: "Important: NEVER use Read on .md files. Use mcp__mdsel__mdsel instead. Triggers: markdown, .md, README, documentation, docs"
 Triggered by: ".md files, markdown, README, documentation"
 allowed-tools:
-  - Bash
+  - mcp__mdsel__mdsel
 ---
 
 # mdsel
 
-```bash
-mdsel file.md       # Index: lists available selectors (h1.0, h2.0, etc.)
-mdsel h1.0 file.md  # First H1
-mdsel h2.1 file.md  # Second H2
-```
+Use `mcp__mdsel__mdsel` tool (NOT Bash, NOT Read):
 
-Uses 0-based indexing
-Always get the index before selecting
+1. Index first: `files: ["README.md"]` (no selector)
+2. Then select: `files: ["README.md"], selector: "h2.0"`
+
+0-based indexing. Always index before selecting.
