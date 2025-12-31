@@ -1,5 +1,4 @@
 {
-  "description": "Remind agents to use mdsel for large Markdown files",
   "PostToolUse": [
     {
       "matcher": "Read",

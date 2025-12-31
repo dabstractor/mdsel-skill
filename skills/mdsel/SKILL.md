@@ -242,4 +242,4 @@ Note: This skill file (SKILL.md) does not require execute permissions.
 
 This skill loads only metadata (~50-100 tokens) when inactive. Full instructions load only when activated by trigger keywords or explicit invocation.
 
-**Trigger keywords**: markdown, large files, selector, index, select
+**Trigger keywords**: markdown, .md, README, documentation, docs
