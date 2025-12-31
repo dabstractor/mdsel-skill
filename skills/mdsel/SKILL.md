@@ -11,6 +11,6 @@ allowed-tools:
 Use `mcp__mdsel__mdsel` tool (NOT Bash, NOT Read):
 
 1. Index first: `files: ["README.md"]` (no selector)
-2. Then select: `files: ["README.md"], selector: "h2.0"`
+2. Then select: `files: ["README.md"], selector: "h2.4,h3.6"`
 
 0-based indexing. Always index before selecting.
