@@ -1,16 +1,8 @@
-{
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Read",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/mdsel-reminder.sh",
-            "timeout": 5
-          }
-        ]
-      }
-    ]
+[
+  {
+    "matcher": "Read",
+    "type": "command",
+    "command": "${CLAUDE_PLUGIN_ROOT}/scripts/mdsel-reminder.sh",
+    "timeout": 5
   }
-}
+]
