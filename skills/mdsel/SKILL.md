@@ -1,38 +1,40 @@
 ---
 name: mdsel
 description: |
-  Efficiently access large Markdown files using declarative selectors.
-  Use mdsel CLI to select specific content without reading entire documents.
-  Triggered by: markdown, large files, selector, h2.0, h1.0.
+  MANDATORY: Never use Read on Markdown files. Always use mdsel CLI.
+  Run: mdsel h2.0 file.md (selects first H2 section)
+  Triggered by: .md files, markdown, README, documentation.
 allowed-tools:
   - Bash
 ---
 
 # mdsel: Markdown Selector Skill
 
-This skill enables efficient access to large Markdown files using the `mdsel` CLI tool.
+## CRITICAL RULE
 
-## Quick Start
+**NEVER use the Read tool on Markdown files (.md). ALWAYS use `mdsel` via Bash instead.**
 
-### What is mdsel?
+This is **vital** for token efficiency. It is **important** that you follow this rule without exception.
 
-`mdsel` is a command-line tool that provides declarative selectors for accessing specific sections of Markdown files without reading the entire document. This is critical for token efficiency when working with large documentation files.
+When you need to read ANY `.md` file:
 
-### When to Use mdsel
+1. **NEVER** use the Read tool
+2. **ALWAYS** use `mdsel <selector> <file>` via Bash **instead**
 
-Use mdsel when:
-- File word count exceeds **MDSEL_MIN_WORDS** (default: 200)
-- You need specific sections, not the entire document
-- Token efficiency is important
+This is not optional. This is a hard requirement.
 
-### Basic Usage
+## Quick Reference
 
 ```bash
-# Select specific content using declarative selectors
-mdsel h2.0 README.md    # First H2 heading
-mdsel h1.0 README.md    # First H1 heading
-mdsel h3.1 README.md    # Second H3 heading
+mdsel h1.0 README.md    # First H1 section
+mdsel h2.0 README.md    # First H2 section
+mdsel h2.1 README.md    # Second H2 section
+mdsel h3.0 README.md    # First H3 section
 ```
+
+## Why This Rule Exists
+
+Using Read on a 1000-word markdown file wastes ~4000 tokens. Using mdsel wastes ~100 tokens. That's a 97% reduction.
 
 ## Selector Syntax
 
@@ -84,39 +86,13 @@ mdsel h2.2 README.md
 mdsel h3.1 README.md
 ```
 
-## When to Use This Skill
-
-### Word Count Threshold
-
-The **MDSEL_MIN_WORDS** environment variable controls when mdsel should be used.
-
-```bash
-# Set custom threshold (default is 200)
-export MDSEL_MIN_WORDS=300
-```
-
-### Decision Flow
-
-1. File is Markdown (`.md` extension)?
-2. Word count > MDSEL_MIN_WORDS?
-3. **Yes**: Use `mdsel <selector> <file>` for specific content
-4. **No**: Read tool is acceptable
-
-### Token Efficiency
-
-Using the Read tool on large Markdown files wastes tokens:
+## Token Savings
 
 | File Size | Read Tool | mdsel | Savings |
 |-----------|-----------|-------|---------|
 | 500 words | ~2,000 tokens | ~100 tokens | 95% |
 | 2,000 words | ~8,000 tokens | ~100 tokens | 98.75% |
 | 5,000 words | ~20,000 tokens | ~100 tokens | 99.5% |
-
-### When NOT to Use mdsel
-
-- Small files (< MDSEL_MIN_WORDS)
-- Non-Markdown files
-- When you need the entire file (rare)
 
 ## Examples
 
