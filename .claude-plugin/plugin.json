@@ -16,7 +16,6 @@
     "token-efficiency"
   ],
   "skills": "./skills",
-  "hooks": "./hooks/hooks.json",
   "mcpServers": {
     "mdsel": {
       "command": "npx",
