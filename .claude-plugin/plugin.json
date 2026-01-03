@@ -1,6 +1,6 @@
 {
   "name": "mdsel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Access large Markdown files using declarative selectors via the mdsel CLI",
   "author": {
     "name": "Dustin Schultz",

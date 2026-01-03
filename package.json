@@ -1,6 +1,6 @@
 {
   "name": "mdsel-skill",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Claude Code marketplace plugin for accessing large Markdown files using declarative selectors",
   "author": "Dustin Schultz <dustindschultz@gmail.com>",
   "license": "MIT",
