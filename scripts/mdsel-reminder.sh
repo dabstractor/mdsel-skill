@@ -45,7 +45,7 @@ main() {
     if [[ "$word_count" -gt "$threshold" ]]; then
         # Output normative reminder as JSON
         # Wording is normative per PRD.md section 6.3 - no variation allowed
-        echo '{"hookSpecificOutput":{"additionalContext":"This is a Markdown file over the configured size threshold.\nUse `mdsel <selector> <file>` instead of Read."}}'
+        echo '{"hookSpecificOutput":{"hookEventName":"PostToolUse","additionalContext":"This is a Markdown file over the configured size threshold.\nUse `mdsel <selector> <file>` instead of Read."}}'
     fi
 
     # Always exit 0 (non-blocking)
